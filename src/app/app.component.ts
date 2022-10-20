@@ -7,4 +7,9 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'Snake Battle';
+
+  range(repetitions:number) {
+    return new Array(repetitions);
+  }
+
 }
