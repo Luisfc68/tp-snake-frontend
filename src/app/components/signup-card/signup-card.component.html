@@ -1,0 +1,55 @@
+<mat-card-content>
+  <h2>Sign up</h2>
+  <form [formGroup]="signUpForm" class="sign-up-form" id="signUpForm" (ngSubmit)="submit()">
+    <mat-form-field appearance="outline">
+      <mat-label>Username</mat-label>
+      <input matInput type="text" formControlName="username" autocomplete="false">
+      <button *ngIf="signUpForm.controls['username'].value"
+              matSuffix
+              mat-icon-button
+              (click)="signUpForm.controls['username'].setValue('')"
+      >
+        <mat-icon>close</mat-icon>
+      </button>
+      <mat-error *ngIf="signUpForm.controls['username'].invalid">{{ getErrorMessage('username') }}</mat-error>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Email</mat-label>
+      <input matInput type="email" formControlName="email" autocomplete="false">
+      <button *ngIf="signUpForm.controls['email'].value"
+              matSuffix
+              mat-icon-button
+              (click)="signUpForm.controls['email'].setValue('')"
+      >
+        <mat-icon>close</mat-icon>
+      </button>
+      <mat-error *ngIf="signUpForm.controls['email'].invalid">{{ getErrorMessage('email') }}</mat-error>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Password</mat-label>
+      <input matInput type="password" formControlName="password" autocomplete="false">
+      <button *ngIf="signUpForm.controls['password'].value"
+              matSuffix
+              mat-icon-button
+              (click)="signUpForm.controls['password'].setValue('')"
+      >
+        <mat-icon>close</mat-icon>
+      </button>
+      <mat-error *ngIf="signUpForm.controls['password'].invalid">{{ getErrorMessage('password') }}</mat-error>
+    </mat-form-field>
+  </form>
+  <span class="login-message">Already have an account? <a (click)="notifyExistingAccount()" class="link">Log in</a></span>
+</mat-card-content>
+<mat-card-actions class="actions">
+  <button
+    mat-raised-button
+    color="primary"
+    type="submit"
+    [disabled]="!signUpForm.valid"
+    form="signUpForm"
+  >
+    Send
+  </button>
+  <button mat-raised-button color="primary" (click)="clean()">Clear</button>
+</mat-card-actions>
+

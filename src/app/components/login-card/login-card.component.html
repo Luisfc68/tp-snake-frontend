@@ -1,0 +1,40 @@
+<mat-card-content>
+  <h2>Login</h2>
+  <form [formGroup]="loginForm" class="login-form" id="loginForm" (ngSubmit)="submit()">
+    <mat-form-field appearance="outline">
+      <mat-label>Username</mat-label>
+      <input matInput type="text" formControlName="username">
+      <button *ngIf="loginForm.controls['username'].value"
+        matSuffix
+        mat-icon-button
+        (click)="loginForm.controls['username'].setValue('')"
+      >
+        <mat-icon>close</mat-icon>
+      </button>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Password</mat-label>
+      <input matInput type="password" formControlName="password">
+      <button *ngIf="loginForm.controls['password'].value"
+              matSuffix
+              mat-icon-button
+              (click)="loginForm.controls['password'].setValue('')"
+      >
+        <mat-icon>close</mat-icon>
+      </button>
+    </mat-form-field>
+  </form>
+  <span class="signup-message">Don't have an account? <a (click)="missingAccount()" class="link">Sign up</a></span>
+</mat-card-content>
+<mat-card-actions class="actions">
+  <button
+    mat-raised-button
+    color="primary"
+    type="submit"
+    [disabled]="!loginForm.valid"
+    form="loginForm"
+  >
+    Send
+  </button>
+  <button mat-raised-button color="primary" (click)="clean()">Clear</button>
+</mat-card-actions>

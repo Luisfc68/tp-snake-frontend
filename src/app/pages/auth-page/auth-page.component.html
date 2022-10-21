@@ -1,1 +1,16 @@
-<p>auth-page works!</p>
+<mat-card class="auth-card">
+  <mat-card-header>
+    <mat-icon mat-card-avatar fontIcon="vpn_key" class="header-logo"></mat-icon>
+    <mat-card-title class="title">Snake Battle</mat-card-title>
+  </mat-card-header>
+  <mat-divider></mat-divider>
+  <div class="content" [@formSlide]="currentForm">
+    <app-login-card
+      (accountRequest)="changeForm('signup')"
+    >
+    </app-login-card>
+    <app-signup-card
+      (existingAccount)="changeForm('login')"
+    ></app-signup-card>
+  </div>
+</mat-card>
