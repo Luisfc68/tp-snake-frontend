@@ -1,0 +1,67 @@
+@import "src/styles";
+
+:host {
+  .player-name {
+    text-transform: capitalize;
+    font-weight: bold;
+    color: $dark-white;
+    margin: 0 0 0 20px;
+  }
+
+  .player-info {
+    width: 80%;
+  }
+
+  .player-stats {
+    margin-top: 14px;
+    display: flex;
+    justify-content: space-evenly;
+    p {
+      font-size: 24px;
+      color: $dark-white;
+    }
+  }
+
+  .profile-container {
+    background-color: $light-primary;
+    box-sizing: border-box;
+    border-radius: 14px;
+    width: 90vw;
+    height: 20vh;
+    max-width: 700px;
+    max-height: 140px;
+    display: flex;
+    border: 1px solid $light-black;
+    transition: 0.3s;
+
+    & > * {
+      opacity: 0.9;
+    }
+    &:hover {
+      .player-name {
+        color: white;
+      }
+      opacity: 1;
+      width: 91vw;
+      max-width: 750px;
+    }
+  }
+
+  .image-container {
+    width: 20%;
+    display: flex;
+    .avatar-image {
+      border: 1px solid rgba($light-black, .6);
+      box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;;
+      background-position: center;
+      background-size: cover;
+      margin: auto;
+      width: 100%;
+      max-width: 100px;
+      max-height: 100px;
+      min-height: 80px;
+      min-width: 80px;
+      height: 15vh;
+    }
+  }
+}

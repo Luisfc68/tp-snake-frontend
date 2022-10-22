@@ -1,0 +1,19 @@
+<mat-card class="profile-container floating-box">
+  <div class="image-container">
+    <div
+      mat-card-avatar
+      class="avatar-image"
+      [ngStyle]="{
+        'background-image': 'url(' + player.profileImage + '), url(/assets/images/default-profile.png)'
+      }"
+    >
+    </div>
+  </div>
+  <div class="player-info">
+    <p class="player-name mat-display-1">{{ player.username }}</p>
+    <div class="player-stats">
+      <p class="mat-body-2">Win ratio: {{ winRationPercentage }}%</p>
+      <p class="mat-body-2">Played games: {{ player.playedGames }}</p>
+    </div>
+  </div>
+</mat-card>

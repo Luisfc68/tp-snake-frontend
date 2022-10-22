@@ -1,1 +1,15 @@
-<p>players-page works!</p>
+<main class="players-container">
+  <app-profile
+    *ngFor="let player of players; trackBy: trackByPlayer"
+    [player]="player"
+  >
+  </app-profile>
+</main>
+<div class="pagination-buttons">
+  <button mat-mini-fab color="warn">
+    <mat-icon>keyboard_double_arrow_left</mat-icon>
+  </button>
+  <button mat-mini-fab color="warn">
+    <mat-icon>keyboard_double_arrow_right</mat-icon>
+  </button>
+</div>

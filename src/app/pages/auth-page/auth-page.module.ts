@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AuthPageComponent } from './auth-page.component';
 import { AuthPageRoutingModule } from './auth-page-routing.module';
-import { MatCardModule } from '@angular/material/card';
 import { LoginCardComponent } from '../../components/login-card/login-card.component';
 import { MatDividerModule } from '@angular/material/divider';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -21,7 +20,6 @@ import { SharedModule } from '../../shared/shared.module';
     SharedModule,
     CommonModule,
     AuthPageRoutingModule,
-    MatCardModule,
     MatDividerModule,
     ReactiveFormsModule,
     MatInputModule
