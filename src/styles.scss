@@ -1,4 +1,10 @@
 /* You can add global styles to this file, and also import other style files */
+@import '~@angular/material/theming';
+@include mat-core();
+
+$light-primary: #9349cf;
+$dark-white: #E1D9D1;
+$warn: #F54D42;
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
@@ -19,4 +25,9 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   cursor: pointer;
   color: blue;
   text-decoration: underline;
+}
+
+.floating-box {
+  opacity: 0.9;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }
