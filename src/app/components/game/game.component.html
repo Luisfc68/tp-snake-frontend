@@ -1,0 +1,8 @@
+<mat-card class="floating-box game">
+  <p class="mat-title owner-data">Game of <span class="owner-name">{{ game.owner.username }}</span></p>
+  <span class="separator"></span>
+  <div class="join-container">
+    <p><span>Players:</span> {{ game.players.length }}/4</p>
+    <button mat-raised-button color="warn">Join game</button>
+  </div>
+</mat-card>

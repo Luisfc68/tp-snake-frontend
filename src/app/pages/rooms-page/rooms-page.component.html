@@ -1,1 +1,10 @@
-<p>rooms-page works!</p>
+<app-return-button></app-return-button>
+<h2 class="title">Available Rooms</h2>
+<main class="rooms-container">
+  <app-game
+    *ngFor="let room of rooms; trackBy: trackByGame"
+    [game]="room"
+  >
+  </app-game>
+</main>
+<app-pagination-buttons></app-pagination-buttons>

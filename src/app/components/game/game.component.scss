@@ -1,0 +1,50 @@
+@import "src/styles";
+
+:host {
+  display: inline-block;
+
+  .separator {
+    width: 100%;
+    border-top: 1.2px solid $dark-white;
+    margin: 10px 0;
+  }
+
+  .owner-data {
+    color: $dark-white;
+    font-weight: bolder;
+    font-size: 22px;
+    margin-bottom: 0;
+    .owner-name {
+      text-transform: capitalize;
+    }
+  }
+  .game {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: stretch;
+    padding: 8px 15px;
+    background-color: $light-primary;
+    border-radius: 12px;
+    width: 20vw;
+    height: 12vh;
+    max-width: 340px;
+    max-height: 200px;
+  }
+  .join-container {
+    color: $dark-white;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    font-size: 20px;
+    p {
+      margin-bottom: 0;
+      span {
+        font-weight: bold;
+      }
+    }
+    button {
+      padding: 0 20px;
+    }
+  }
+}
