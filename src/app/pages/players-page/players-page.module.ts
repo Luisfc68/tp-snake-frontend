@@ -5,6 +5,7 @@ import { PlayersPageRoutingModule } from './players-page-routing.module';
 import { ProfileComponent } from '../../components/profile/profile.component';
 import { SharedModule } from '../../shared/shared.module';
 import { MatIconModule } from '@angular/material/icon';
+import { PaginationButtonsModule } from '../../components/pagination-buttons/pagination-buttons.module';
 
 
 @NgModule({
@@ -16,7 +17,8 @@ import { MatIconModule } from '@angular/material/icon';
     CommonModule,
     SharedModule,
     PlayersPageRoutingModule,
-    MatIconModule
+    MatIconModule,
+    PaginationButtonsModule
   ]
 })
 export class PlayersPageModule { }
