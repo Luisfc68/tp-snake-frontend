@@ -1,0 +1,31 @@
+<p class="level-label">Level: {{ formattedLevel }}</p>
+<canvas id="game-board">
+</canvas>
+<section class="players-list">
+  <mat-chip-list
+    class="mat-chip-list-stacked"
+  >
+    <mat-chip
+      *ngFor="let snake of snakes; trackBy: trackBySnake"
+      [ngStyle]="{ 'background-color': snake.color }"
+      disableRipple
+      class="floating-box player-label"
+    >
+      <div class="avatar-container">
+        <img
+          matChipAvatar
+          [src]="snake.profileImage"
+          [alt]="snake.username + ' avatar'"
+          fallback="/assets/images/default-profile.png"
+        />
+        <span
+          class="eliminated-cross"
+          [ngStyle]="{ 'opacity': snake.alive? 0:0.8 }"
+        >
+        X
+      </span>
+      </div>
+      {{ snake.username }}
+    </mat-chip>
+  </mat-chip-list>
+</section>

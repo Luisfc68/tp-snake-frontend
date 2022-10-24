@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatCardModule } from '@angular/material/card';
+import { ImgFallbackModule } from '../directives/img-fallback/img-fallback.module';
 
 
 
@@ -13,12 +14,14 @@ import { MatCardModule } from '@angular/material/card';
     CommonModule,
     MatIconModule,
     MatButtonModule,
-    MatCardModule
+    MatCardModule,
+    ImgFallbackModule
   ],
   exports: [
     MatIconModule,
     MatButtonModule,
-    MatCardModule
+    MatCardModule,
+    ImgFallbackModule
   ]
 })
 export class SharedModule { }

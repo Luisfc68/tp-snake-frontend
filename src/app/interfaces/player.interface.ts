@@ -7,3 +7,8 @@ export interface Player {
   winRatio:number;
   profileImage?:string;
 }
+
+export type SnakePlayer = Player & {
+  color:string;
+  alive:boolean;
+}

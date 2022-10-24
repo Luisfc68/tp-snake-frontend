@@ -1,1 +1,19 @@
-<p>game-page works!</p>
+<app-snake-board
+  [game]="game"
+>
+</app-snake-board>
+<div class="game-buttons">
+  <button
+    mat-raised-button
+    color="warn"
+    (click)="notifyReady()">
+    {{ ready? 'Ready' : 'Not Ready' }}
+  </button>
+  <button
+    mat-raised-button
+    color="warn"
+    *ngIf="isAdmin"
+    (click)="initGame()">
+    Start
+  </button>
+</div>
