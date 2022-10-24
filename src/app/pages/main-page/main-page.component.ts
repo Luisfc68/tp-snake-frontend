@@ -12,4 +12,8 @@ export class MainPageComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  doLogout() {
+    // todo implementar
+  }
+
 }

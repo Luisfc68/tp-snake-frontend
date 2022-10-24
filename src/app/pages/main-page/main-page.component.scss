@@ -121,4 +121,17 @@
       }
     }
   }
+
+  .logout-button {
+    position: fixed;
+    display: block;
+    top: 2%;
+    left: 2%;
+    color: $dark-white;
+    .mat-icon{
+      height:30px;
+      width:30px;
+      font-size:30px;
+    }
+  }
 }
