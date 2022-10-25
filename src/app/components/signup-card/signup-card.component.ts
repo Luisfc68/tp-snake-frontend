@@ -1,5 +1,6 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { SignUpRequest } from '../../interfaces/request/signUp.interface';
 
 @Component({
   selector: 'app-signup-card',
@@ -12,6 +13,9 @@ export class SignupCardComponent implements OnInit {
 
   @Output()
   existingAccount: EventEmitter<void> = new EventEmitter();
+
+  @Output()
+  signUpRequest: EventEmitter<SignUpRequest> = new EventEmitter()
 
   constructor(
     private formBuilder: FormBuilder
@@ -36,11 +40,11 @@ export class SignupCardComponent implements OnInit {
   }
 
   submit() {
-    console.log('hola')
-    console.log(this.signUpForm.controls['password'].invalid)
-    console.log(this.signUpForm.controls['username'].value)
-    console.log(this.signUpForm.controls['password'].value)
-    console.log(this.signUpForm.controls['email'].value)
+    this.signUpRequest.emit({
+      username: this.signUpForm.controls['username'].value,
+      email: this.signUpForm.controls['email'].value,
+      password: this.signUpForm.controls['password'].value
+    });
   }
 
   getErrorMessage(fieldName:string): string {

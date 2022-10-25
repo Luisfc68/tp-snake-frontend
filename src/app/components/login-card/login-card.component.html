@@ -2,12 +2,12 @@
   <h2>Login</h2>
   <form [formGroup]="loginForm" class="login-form" id="loginForm" (ngSubmit)="submit()">
     <mat-form-field appearance="outline">
-      <mat-label>Username</mat-label>
-      <input matInput type="text" formControlName="username">
-      <button *ngIf="loginForm.controls['username'].value"
+      <mat-label>Email</mat-label>
+      <input matInput type="email" formControlName="email">
+      <button *ngIf="loginForm.controls['email'].value"
         matSuffix
         mat-icon-button
-        (click)="loginForm.controls['username'].setValue('')"
+        (click)="loginForm.controls['email'].setValue('')"
       >
         <mat-icon>close</mat-icon>
       </button>

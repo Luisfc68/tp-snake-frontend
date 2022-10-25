@@ -4,6 +4,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatCardModule } from '@angular/material/card';
 import { ImgFallbackModule } from '../directives/img-fallback/img-fallback.module';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 
 
 
@@ -15,13 +16,15 @@ import { ImgFallbackModule } from '../directives/img-fallback/img-fallback.modul
     MatIconModule,
     MatButtonModule,
     MatCardModule,
-    ImgFallbackModule
+    ImgFallbackModule,
+    MatProgressBarModule
   ],
   exports: [
     MatIconModule,
     MatButtonModule,
     MatCardModule,
-    ImgFallbackModule
+    ImgFallbackModule,
+    MatProgressBarModule
   ]
 })
 export class SharedModule { }

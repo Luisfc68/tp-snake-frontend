@@ -5,6 +5,7 @@
 $light-primary: #9349cf;
 $dark-white: #E1D9D1;
 $warn: #F54D42;
+$dark-red: #ab1d1d;
 $light-black: #454545;
 
 html, body { height: 100%; }
@@ -31,4 +32,19 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 .floating-box {
   opacity: 0.9;
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+
+mat-progress-bar {
+  position: fixed;
+  width: 100vw;
+  top: 0;
+  right: 0;
+}
+
+.errorSnackBar {
+  background-color: $dark-red;
+  color: $dark-white;
+  button {
+    color: $dark-white;
+  }
 }

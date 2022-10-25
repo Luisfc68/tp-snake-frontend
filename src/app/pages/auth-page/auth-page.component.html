@@ -1,3 +1,8 @@
+<mat-progress-bar
+  mode="indeterminate"
+  color="warn"
+  *ngIf="loading"
+></mat-progress-bar>
 <mat-card class="auth-card floating-box">
   <mat-card-header>
     <mat-icon mat-card-avatar fontIcon="vpn_key" class="header-logo"></mat-icon>
@@ -6,10 +11,12 @@
   <mat-divider></mat-divider>
   <div class="content" [@formSlide]="currentForm">
     <app-login-card
+      (loginRequest)="doLogin($event)"
       (accountRequest)="changeForm('signup')"
     >
     </app-login-card>
     <app-signup-card
+      (signUpRequest)="doSignUp($event)"
       (existingAccount)="changeForm('login')"
     ></app-signup-card>
   </div>
