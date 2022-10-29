@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Game } from '../../interfaces/game.interface';
+import { GameService } from '../../services/games/games.service';
+
 
 @Component({
   selector: 'app-rooms-page',
@@ -8,365 +10,70 @@ import { Game } from '../../interfaces/game.interface';
 })
 export class RoomsPageComponent implements OnInit {
 
-  rooms: Game[] = [
-    {
-      id: '123456abcdef',
-      players: [
-        {
-          id: '123abc',
-          username: "luisfc68",
-          email:"luisfc68@gmail.com",
-          playedGames: 3,
-          gamesWon: 2,
-          winRatio: 0.66
-        },
-        {
-          id: '456abc',
-          username: "isa123",
-          email:"isabella@gmail.com",
-          playedGames: 3,
-          gamesWon: 4,
-          winRatio: 1
-        },
-        {
-          id: '789abc',
-          username: "max456",
-          email:"max@gmail.com",
-          playedGames: 3,
-          gamesWon: 1,
-          winRatio: 0.33
-        },
-      ],
-      owner: {
-        id: '123abc',
-        username: "luisfc68asdasdasdasd",
-        email:"luisfc68@gmail.com",
-        playedGames: 3,
-        gamesWon: 2,
-        winRatio: 0.66
-      },
-      status: 'WAITING',
-      maxLevelReached: 1
-    },
-    {
-      id: '123456abcdef',
-      players: [
-        {
-          id: '123abc',
-          username: "luisfc68",
-          email:"luisfc68@gmail.com",
-          playedGames: 3,
-          gamesWon: 2,
-          winRatio: 0.66
-        },
-        {
-          id: '456abc',
-          username: "isa123",
-          email:"isabella@gmail.com",
-          playedGames: 3,
-          gamesWon: 4,
-          winRatio: 1
-        },
-        {
-          id: '789abc',
-          username: "max456",
-          email:"max@gmail.com",
-          playedGames: 3,
-          gamesWon: 1,
-          winRatio: 0.33
-        },
-      ],
-      owner: {
-        id: '123abc',
-        username: "luisfc68",
-        email:"luisfc68@gmail.com",
-        playedGames: 3,
-        gamesWon: 2,
-        winRatio: 0.66
-      },
-      status: 'WAITING',
-      maxLevelReached: 1
-    },
-    {
-      id: '123456abcdef',
-      players: [
-        {
-          id: '123abc',
-          username: "luisfc68",
-          email:"luisfc68@gmail.com",
-          playedGames: 3,
-          gamesWon: 2,
-          winRatio: 0.66
-        },
-        {
-          id: '456abc',
-          username: "isa123",
-          email:"isabella@gmail.com",
-          playedGames: 3,
-          gamesWon: 4,
-          winRatio: 1
-        },
-        {
-          id: '789abc',
-          username: "max456",
-          email:"max@gmail.com",
-          playedGames: 3,
-          gamesWon: 1,
-          winRatio: 0.33
-        },
-      ],
-      owner: {
-        id: '123abc',
-        username: "luisfc68asdasdasdasd",
-        email:"luisfc68@gmail.com",
-        playedGames: 3,
-        gamesWon: 2,
-        winRatio: 0.66
-      },
-      status: 'WAITING',
-      maxLevelReached: 1
-    },
-    {
-      id: '123456abcdef',
-      players: [
-        {
-          id: '123abc',
-          username: "luisfc68",
-          email:"luisfc68@gmail.com",
-          playedGames: 3,
-          gamesWon: 2,
-          winRatio: 0.66
-        },
-        {
-          id: '456abc',
-          username: "isa123",
-          email:"isabella@gmail.com",
-          playedGames: 3,
-          gamesWon: 4,
-          winRatio: 1
-        },
-        {
-          id: '789abc',
-          username: "max456",
-          email:"max@gmail.com",
-          playedGames: 3,
-          gamesWon: 1,
-          winRatio: 0.33
-        },
-      ],
-      owner: {
-        id: '123abc',
-        username: "luisfc68",
-        email:"luisfc68@gmail.com",
-        playedGames: 3,
-        gamesWon: 2,
-        winRatio: 0.66
-      },
-      status: 'WAITING',
-      maxLevelReached: 1
-    },
-    {
-      id: '123456abcdef',
-      players: [
-        {
-          id: '123abc',
-          username: "luisfc68",
-          email:"luisfc68@gmail.com",
-          playedGames: 3,
-          gamesWon: 2,
-          winRatio: 0.66
-        },
-        {
-          id: '456abc',
-          username: "isa123",
-          email:"isabella@gmail.com",
-          playedGames: 3,
-          gamesWon: 4,
-          winRatio: 1
-        },
-        {
-          id: '789abc',
-          username: "max456",
-          email:"max@gmail.com",
-          playedGames: 3,
-          gamesWon: 1,
-          winRatio: 0.33
-        },
-      ],
-      owner: {
-        id: '123abc',
-        username: "luisfc68asdasdasdasd",
-        email:"luisfc68@gmail.com",
-        playedGames: 3,
-        gamesWon: 2,
-        winRatio: 0.66
-      },
-      status: 'WAITING',
-      maxLevelReached: 1
-    },
-    {
-      id: '123456abcdef',
-      players: [
-        {
-          id: '123abc',
-          username: "luisfc68",
-          email:"luisfc68@gmail.com",
-          playedGames: 3,
-          gamesWon: 2,
-          winRatio: 0.66
-        },
-        {
-          id: '456abc',
-          username: "isa123",
-          email:"isabella@gmail.com",
-          playedGames: 3,
-          gamesWon: 4,
-          winRatio: 1
-        },
-        {
-          id: '789abc',
-          username: "max456",
-          email:"max@gmail.com",
-          playedGames: 3,
-          gamesWon: 1,
-          winRatio: 0.33
-        },
-      ],
-      owner: {
-        id: '123abc',
-        username: "luisfc68",
-        email:"luisfc68@gmail.com",
-        playedGames: 3,
-        gamesWon: 2,
-        winRatio: 0.66
-      },
-      status: 'WAITING',
-      maxLevelReached: 1
-    },
-    {
-      id: '123456abcdef',
-      players: [
-        {
-          id: '123abc',
-          username: "luisfc68",
-          email:"luisfc68@gmail.com",
-          playedGames: 3,
-          gamesWon: 2,
-          winRatio: 0.66
-        },
-        {
-          id: '456abc',
-          username: "isa123",
-          email:"isabella@gmail.com",
-          playedGames: 3,
-          gamesWon: 4,
-          winRatio: 1
-        },
-        {
-          id: '789abc',
-          username: "max456",
-          email:"max@gmail.com",
-          playedGames: 3,
-          gamesWon: 1,
-          winRatio: 0.33
-        },
-      ],
-      owner: {
-        id: '123abc',
-        username: "luisfc68asdasdasdasd",
-        email:"luisfc68@gmail.com",
-        playedGames: 3,
-        gamesWon: 2,
-        winRatio: 0.66
-      },
-      status: 'WAITING',
-      maxLevelReached: 1
-    },
-    {
-      id: '123456abcdef',
-      players: [
-        {
-          id: '123abc',
-          username: "luisfc68",
-          email:"luisfc68@gmail.com",
-          playedGames: 3,
-          gamesWon: 2,
-          winRatio: 0.66
-        },
-        {
-          id: '456abc',
-          username: "isa123",
-          email:"isabella@gmail.com",
-          playedGames: 3,
-          gamesWon: 4,
-          winRatio: 1
-        },
-        {
-          id: '789abc',
-          username: "max456",
-          email:"max@gmail.com",
-          playedGames: 3,
-          gamesWon: 1,
-          winRatio: 0.33
-        },
-      ],
-      owner: {
-        id: '123abc',
-        username: "luisfc68",
-        email:"luisfc68@gmail.com",
-        playedGames: 3,
-        gamesWon: 2,
-        winRatio: 0.66
-      },
-      status: 'WAITING',
-      maxLevelReached: 1
-    },
-    {
-      id: '123456abcdef',
-      players: [
-        {
-          id: '123abc',
-          username: "luisfc68",
-          email:"luisfc68@gmail.com",
-          playedGames: 3,
-          gamesWon: 2,
-          winRatio: 0.66
-        },
-        {
-          id: '456abc',
-          username: "isa123",
-          email:"isabella@gmail.com",
-          playedGames: 3,
-          gamesWon: 4,
-          winRatio: 1
-        },
-        {
-          id: '789abc',
-          username: "max456",
-          email:"max@gmail.com",
-          playedGames: 3,
-          gamesWon: 1,
-          winRatio: 0.33
-        },
-      ],
-      owner: {
-        id: '123abc',
-        username: "luisfc68asdasdasdasd",
-        email:"luisfc68@gmail.com",
-        playedGames: 3,
-        gamesWon: 2,
-        winRatio: 0.66
-      },
-      status: 'WAITING',
-      maxLevelReached: 1
-    },
-  ]
+  limit= 5;
+  offset= 0;
+  jumpedAmmount=5;
+  currentLeftArrow=true;
+  currentRightArrow=false;
 
+
+  rooms: Game[] = [];
+  
   trackByGame = (_index:number, game:Game) => game.id
 
-  constructor() { }
+  constructor(
+    private readonly gamesService:GameService) { 
+  }
 
   ngOnInit(): void {
+    this.getRooms()
   }
+
+
+  getRooms(){
+    this.gamesService.getRooms(this.limit,this.offset).subscribe(
+      response =>{
+        console.log(response)
+        this.rooms = response;
+      })
+  }
+
+  getNextRooms(){
+    this.offset+= this.jumpedAmmount;
+    this.gamesService.getRooms(this.limit,this.offset).subscribe(
+      response =>{
+        if(response.length!=0){
+          this.rooms=[]
+          console.log(response)
+          this.rooms = response;
+          if(this.currentLeftArrow){
+            this.currentLeftArrow=false;
+          }
+        }
+        else{
+          this.offset-= this.jumpedAmmount;
+          this.currentRightArrow=true;
+        }
+      }
+    )
+  }
+  getPreviousRooms(){
+    if(this.offset-this.jumpedAmmount>=0){
+      if(this.currentRightArrow){
+        this.currentRightArrow=false;
+      }
+    this.offset-= this.jumpedAmmount;
+    this.gamesService.getRooms(this.limit,this.offset).subscribe(
+      response =>{
+        console.log(response)
+        this.rooms = response;
+      }
+    )
+  }
+  else{
+    this.currentLeftArrow=true;
+  }
+}
+
 
 }

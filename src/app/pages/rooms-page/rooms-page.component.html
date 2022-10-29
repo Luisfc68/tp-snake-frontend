@@ -7,4 +7,4 @@
   >
   </app-game>
 </main>
-<app-pagination-buttons></app-pagination-buttons>
+<app-pagination-buttons (notifyNext)="getNextRooms()" (notifyPrevious)="getPreviousRooms()" [statusLeftArrow]="currentLeftArrow" [statusRightArrow]="currentRightArrow"></app-pagination-buttons>
