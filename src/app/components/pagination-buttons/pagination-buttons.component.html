@@ -1,8 +1,8 @@
 <div class="pagination-buttons">
-  <button mat-mini-fab color="warn">
+  <button mat-mini-fab color="warn" (click)="previousOnClick()" [disabled]='statusLeftArrow'>
     <mat-icon>keyboard_double_arrow_left</mat-icon>
   </button>
-  <button mat-mini-fab color="warn">
+  <button mat-mini-fab color="warn" (click)="nextOnClick()" [disabled]='statusRightArrow'>
     <mat-icon>keyboard_double_arrow_right</mat-icon>
   </button>
 </div>

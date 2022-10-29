@@ -6,4 +6,4 @@
   >
   </app-profile>
 </main>
-<app-pagination-buttons></app-pagination-buttons>
+<app-pagination-buttons (notifyNext)="getNextPlayers()" (notifyPrevious)="getPreviousPlayers()" [statusLeftArrow]="currentLeftArrow" [statusRightArrow]="currentRightArrow"></app-pagination-buttons>
