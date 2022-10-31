@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Player } from '../../interfaces/player.interface';
 import { PlayersService } from '../../services/players/players.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
+
 @Component({
   selector: 'app-players-page',
   templateUrl: './players-page.component.html',
@@ -8,11 +10,10 @@ import { PlayersService } from '../../services/players/players.service';
 })
 export class PlayersPageComponent implements OnInit {
 
-  limit= 2;
+  limit= 5;
   offset= 0;
-  jumpedAmmount=2;
-  currentLeftArrow=true;
-  currentRightArrow=false;
+  hideLeftArrow=true;
+  hideRightArrow=false;
 
 
   players: Player[] = [];
@@ -20,7 +21,10 @@ export class PlayersPageComponent implements OnInit {
   trackByPlayer = (index:number, player:Player) => player.id
 
   constructor(
-    private readonly playersService:PlayersService) { 
+    private readonly playersService:PlayersService,
+    private readonly snackBar: MatSnackBar,
+    ) { 
+    
   }
 
   ngOnInit(): void {
@@ -29,47 +33,46 @@ export class PlayersPageComponent implements OnInit {
 
 
   getPlayers(){
-    this.playersService.getPlayers(this.limit,this.offset).subscribe(
-      response =>{
-        console.log(response)
-        this.players = response;
-      })
+    this.playersService.getPlayers(this.limit,this.offset)
+    .then(response => this.players=response)
+    .catch(e => this.snackBar.open(e.error.error, 'OK', { panelClass: ['errorSnackBar'] }))
   }
 
   getNextPlayers(){
-    this.offset+= this.jumpedAmmount;
-    this.playersService.getPlayers(this.limit,this.offset).subscribe(
+    this.offset+= this.limit;
+    this.playersService.getPlayers(this.limit,this.offset).then(
       response =>{
         if(response.length!=0){
           this.players=[]
-          console.log(response)
           this.players = response;
-          if(this.currentLeftArrow){
-            this.currentLeftArrow=false;
+          if(this.hideLeftArrow){
+            this.hideLeftArrow=false;
           }
         }
         else{
-          this.offset-= this.jumpedAmmount;
-          this.currentRightArrow=true;
+          this.offset-= this.limit;
+          this.hideRightArrow=true;
         }
       }
-    )
+    )    
+    .catch(e => this.snackBar.open(e.error.error, 'OK', { panelClass: ['errorSnackBar'] }))
   }
   getPreviousPlayers(){
-    if(this.offset-this.jumpedAmmount>=0){
-      if(this.currentRightArrow){
-        this.currentRightArrow=false;
+    if(this.offset-this.limit>=0){
+      if(this.hideRightArrow){
+        this.hideRightArrow=false;
       }
-    this.offset-= this.jumpedAmmount;
-    this.playersService.getPlayers(this.limit,this.offset).subscribe(
+    this.offset-= this.limit;
+    this.playersService.getPlayers(this.limit,this.offset).then(
       response =>{
-        console.log(response)
         this.players = response;
       }
-    )
+    )    
+    .catch(e => this.snackBar.open(e.error.error, 'OK', { panelClass: ['errorSnackBar'] }))
+
   }
   else{
-    this.currentLeftArrow=true;
+    this.hideLeftArrow=true;
   }
 }
 
