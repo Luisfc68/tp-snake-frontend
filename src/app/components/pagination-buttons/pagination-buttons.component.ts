@@ -15,7 +15,7 @@ export class PaginationButtonsComponent implements OnInit {
 
 
   @Input()
-  statusLeftArrow!: Boolean;
+  statusLeftArrow!: boolean;
   @Input()
   statusRightArrow!: boolean;
 
