@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Game } from '../../interfaces/game.interface';
 import { GameService } from '../../services/games/games.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 
 @Component({
@@ -12,9 +13,8 @@ export class RoomsPageComponent implements OnInit {
 
   limit= 5;
   offset= 0;
-  jumpedAmmount=5;
-  currentLeftArrow=true;
-  currentRightArrow=false;
+  hideLeftArrow=true;
+  hideRightArrow=false;
 
 
   rooms: Game[] = [];
@@ -22,7 +22,8 @@ export class RoomsPageComponent implements OnInit {
   trackByGame = (_index:number, game:Game) => game.id
 
   constructor(
-    private readonly gamesService:GameService) { 
+    private readonly gamesService:GameService,
+    private readonly snackBar: MatSnackBar) { 
   }
 
   ngOnInit(): void {
@@ -31,47 +32,47 @@ export class RoomsPageComponent implements OnInit {
 
 
   getRooms(){
-    this.gamesService.getRooms(this.limit,this.offset).subscribe(
+    this.gamesService.getRooms(this.limit,this.offset).then(
       response =>{
-        console.log(response)
         this.rooms = response;
       })
+    .catch(e => this.snackBar.open(e.error.error, 'OK', { panelClass: ['errorSnackBar'] }))
   }
 
   getNextRooms(){
-    this.offset+= this.jumpedAmmount;
-    this.gamesService.getRooms(this.limit,this.offset).subscribe(
+    this.offset+= this.limit;
+    this.gamesService.getRooms(this.limit,this.offset).then(
       response =>{
         if(response.length!=0){
           this.rooms=[]
-          console.log(response)
           this.rooms = response;
-          if(this.currentLeftArrow){
-            this.currentLeftArrow=false;
+          if(this.hideLeftArrow){
+            this.hideLeftArrow=false;
           }
         }
         else{
-          this.offset-= this.jumpedAmmount;
-          this.currentRightArrow=true;
+          this.offset-= this.limit;
+          this.hideRightArrow=true;
         }
       }
     )
+  .catch(e => this.snackBar.open(e.error.error, 'OK', { panelClass: ['errorSnackBar'] }))  
   }
   getPreviousRooms(){
-    if(this.offset-this.jumpedAmmount>=0){
-      if(this.currentRightArrow){
-        this.currentRightArrow=false;
+    if(this.offset-this.limit>=0){
+      if(this.hideRightArrow){
+        this.hideRightArrow=false;
       }
-    this.offset-= this.jumpedAmmount;
-    this.gamesService.getRooms(this.limit,this.offset).subscribe(
+    this.offset-= this.limit;
+    this.gamesService.getRooms(this.limit,this.offset).then(
       response =>{
-        console.log(response)
         this.rooms = response;
       }
     )
+  .catch(e => this.snackBar.open(e.error.error, 'OK', { panelClass: ['errorSnackBar'] }))  
   }
   else{
-    this.currentLeftArrow=true;
+    this.hideLeftArrow=true;
   }
 }
 

@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, Input, EventEmitter } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output, Input } from '@angular/core';
 
 @Component({
   selector: 'app-pagination-buttons',
@@ -7,6 +7,7 @@ import { Component, OnInit, Output, Input, EventEmitter } from '@angular/core';
 })
 export class PaginationButtonsComponent implements OnInit {
 
+
   constructor() { }
 
   @Output() notifyNext: EventEmitter<any> = new EventEmitter<any>();
@@ -14,7 +15,7 @@ export class PaginationButtonsComponent implements OnInit {
 
 
   @Input()
-  statusLeftArrow!: Boolean;
+  statusLeftArrow!: boolean;
   @Input()
   statusRightArrow!: boolean;
 
@@ -28,5 +29,6 @@ export class PaginationButtonsComponent implements OnInit {
 
   ngOnInit(): void {
   }
+
 
 }
