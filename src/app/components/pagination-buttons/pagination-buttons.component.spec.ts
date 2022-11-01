@@ -8,9 +8,9 @@ describe('PaginationButtonsComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ PaginationButtonsComponent ]
+      declarations: [PaginationButtonsComponent]
     })
-    .compileComponents();
+      .compileComponents();
 
     fixture = TestBed.createComponent(PaginationButtonsComponent);
     component = fixture.componentInstance;
