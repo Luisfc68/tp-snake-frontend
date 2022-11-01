@@ -19,6 +19,7 @@ export class PaginationButtonsComponent implements OnInit {
   @Input()
   statusRightArrow!: boolean;
 
+
   nextOnClick(): void {
     this.notifyNext.emit()
   }
