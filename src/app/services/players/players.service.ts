@@ -13,20 +13,20 @@ export class PlayersService {
   private readonly BASE_PATH = `${environment.apiUrl}/players`;
 
   constructor(
-    private http:HttpClient
-  ) {}
+    private http: HttpClient
+  ) { }
 
-  getPlayer(id:string):Promise<Player> {
+  getPlayer(id: string): Promise<Player> {
     return firstValueFrom(this.http.get<Player>(`${this.BASE_PATH}/${id}`));
   }
 
-  createPlayer(username:string, email:string, password:string):Promise<Player> {
+  createPlayer(username: string, email: string, password: string): Promise<Player> {
     return firstValueFrom(this.http.post<Player>(this.BASE_PATH, { username, email, password }));
   }
 
-  getPlayers(limit:number,offset:number):Promise<Player[]>{
-    return firstValueFrom(this.http.get<Player[]>(`${this.BASE_PATH}`,{
-      params: { limit: limit, offset: offset}
+  getPlayers(limit: number, offset: number): Promise<Player[]> {
+    return firstValueFrom(this.http.get<Player[]>(`${this.BASE_PATH}`, {
+      params: { limit: limit, offset: offset }
     }));
   }
 }

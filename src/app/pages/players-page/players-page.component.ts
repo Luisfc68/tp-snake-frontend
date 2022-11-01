@@ -10,21 +10,21 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 })
 export class PlayersPageComponent implements OnInit {
 
-  limit= 5;
-  offset= 0;
-  hideLeftArrow=true;
-  hideRightArrow=false;
+  limit = 5;
+  offset = 0;
+  hideLeftArrow = true;
+  hideRightArrow = false;
 
 
   players: Player[] = [];
-  
-  trackByPlayer = (index:number, player:Player) => player.id
+
+  trackByPlayer = (index: number, player: Player) => player.id
 
   constructor(
-    private readonly playersService:PlayersService,
+    private readonly playersService: PlayersService,
     private readonly snackBar: MatSnackBar,
-    ) { 
-    
+  ) {
+
   }
 
   ngOnInit(): void {
@@ -32,48 +32,48 @@ export class PlayersPageComponent implements OnInit {
   }
 
 
-  getPlayers(){
-    this.playersService.getPlayers(this.limit,this.offset)
-    .then(response => this.players=response)
-    .catch(e => this.snackBar.open(e.error.error, 'OK', { panelClass: ['errorSnackBar'] }))
+  getPlayers() {
+    this.playersService.getPlayers(this.limit, this.offset)
+      .then(response => this.players = response)
+      .catch(e => this.snackBar.open(e.error.error, 'OK', { panelClass: ['errorSnackBar'] }))
   }
 
-  getNextPlayers(){
-    this.offset+= this.limit;
-    this.playersService.getPlayers(this.limit,this.offset).then(
-      response =>{
-        if(response.length!=0){
-          this.players=[]
+  getNextPlayers() {
+    this.offset += this.limit;
+    this.playersService.getPlayers(this.limit, this.offset).then(
+      response => {
+        if (response.length != 0) {
+          this.players = []
           this.players = response;
-          if(this.hideLeftArrow){
-            this.hideLeftArrow=false;
+          if (this.hideLeftArrow) {
+            this.hideLeftArrow = false;
           }
         }
-        else{
-          this.offset-= this.limit;
-          this.hideRightArrow=true;
+        else {
+          this.offset -= this.limit;
+          this.hideRightArrow = true;
         }
       }
-    )    
-    .catch(e => this.snackBar.open(e.error.error, 'OK', { panelClass: ['errorSnackBar'] }))
+    )
+      .catch(e => this.snackBar.open(e.error.error, 'OK', { panelClass: ['errorSnackBar'] }))
   }
-  getPreviousPlayers(){
-    if(this.offset-this.limit>=0){
-      if(this.hideRightArrow){
-        this.hideRightArrow=false;
+  getPreviousPlayers() {
+    if (this.offset - this.limit >= 0) {
+      if (this.hideRightArrow) {
+        this.hideRightArrow = false;
       }
-    this.offset-= this.limit;
-    this.playersService.getPlayers(this.limit,this.offset).then(
-      response =>{
-        this.players = response;
-      }
-    )    
-    .catch(e => this.snackBar.open(e.error.error, 'OK', { panelClass: ['errorSnackBar'] }))
+      this.offset -= this.limit;
+      this.playersService.getPlayers(this.limit, this.offset).then(
+        response => {
+          this.players = response;
+        }
+      )
+        .catch(e => this.snackBar.open(e.error.error, 'OK', { panelClass: ['errorSnackBar'] }))
 
+    }
+    else {
+      this.hideLeftArrow = true;
+    }
   }
-  else{
-    this.hideLeftArrow=true;
-  }
-}
 
 }
