@@ -3,6 +3,6 @@
   <span class="separator"></span>
   <div class="join-container">
     <p><span>Players:</span> {{ game.players.length }}/4</p>
-    <button mat-raised-button color="warn">Join game</button>
+    <button mat-raised-button color="warn" (click)="emitGameJoined()">Join game</button>
   </div>
 </mat-card>

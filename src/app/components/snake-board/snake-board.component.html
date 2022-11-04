@@ -1,4 +1,10 @@
-<p class="level-label">Level: {{ formattedLevel }}</p>
+<div>
+  <p class="level-label">Level: {{ formattedLevel }}</p>
+  <button mat-raised-button color="warn" class="copy-button">
+    Copy Code!
+    <mat-icon>content_copy</mat-icon>
+  </button>
+</div>
 <canvas id="game-board">
 </canvas>
 <section class="players-list">
@@ -14,7 +20,7 @@
       <div class="avatar-container">
         <img
           matChipAvatar
-          [src]="snake.profileImage"
+          [src]="getProfileImage(snake)"
           [alt]="snake.username + ' avatar'"
           fallback="/assets/images/default-profile.png"
         />

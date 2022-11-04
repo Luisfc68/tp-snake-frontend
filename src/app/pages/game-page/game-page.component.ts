@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Game } from '../../interfaces/game.interface';
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-game-page',
@@ -12,6 +13,8 @@ export class GamePageComponent implements OnInit {
 
   isAdmin:boolean = true;
 
+  game?:Game;
+  /*
   game: Game = {
     id: '123456abcdef',
     players: [
@@ -57,10 +60,19 @@ export class GamePageComponent implements OnInit {
       winRatio: 0.66
     },
     status: 'WAITING',
-    maxLevelReached: 1
+    maxReachedLevel: 1
   };
-
-  constructor() { }
+*/
+  constructor(
+    private readonly router:Router
+  ) {
+    const navigationState = this.router.getCurrentNavigation()?.extras?.state;
+    if (navigationState) {
+      this.game = navigationState['game'];
+    } else {
+      this.router.navigateByUrl('/');
+    }
+  }
 
   ngOnInit(): void {}
 

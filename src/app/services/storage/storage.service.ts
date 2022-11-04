@@ -28,8 +28,20 @@ export class StorageService {
     localStorage.setItem(this.USER_KEY, JSON.stringify(user));
   }
 
+  getUserFromStorage():Player|null {
+    const user:string|null = localStorage.getItem(this.USER_KEY)
+    if (!user) {
+      return null;
+    } else {
+      return JSON.parse(user);
+    }
+  }
+
   getAccessToken():string|undefined {
     return this.getTokensFromStorage()?.accessToken;
   }
 
+  clearStorage() {
+    localStorage.clear();
+  }
 }

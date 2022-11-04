@@ -1,4 +1,4 @@
-import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { SignUpRequest } from '../../interfaces/request/signUp.interface';
 
@@ -21,8 +21,8 @@ export class SignupCardComponent implements OnInit {
     private formBuilder: FormBuilder
   ) {
     this.signUpForm = formBuilder.group({
-      username: ['', [Validators.required, Validators.min(4)]],
-      password: ['', [Validators.required, Validators.min(4)]],
+      username: ['', [Validators.required, Validators.minLength(4)]],
+      password: ['', [Validators.required, Validators.minLength(4)]],
       email: ['', [Validators.required, Validators.email]]
     });
   }

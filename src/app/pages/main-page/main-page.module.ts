@@ -6,11 +6,16 @@ import { SharedModule } from '../../shared/shared.module';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatRippleModule } from '@angular/material/core';
+import { MatDialogModule } from '@angular/material/dialog';
+import { ProfileDialogComponent } from '../../components/profile-dialog/profile-dialog.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 
 @NgModule({
   declarations: [
-    MainPageComponent
+    MainPageComponent,
+    ProfileDialogComponent
   ],
   imports: [
     SharedModule,
@@ -18,7 +23,11 @@ import { MatRippleModule } from '@angular/material/core';
     MainPageRoutingModule,
     MatInputModule,
     MatFormFieldModule,
-    MatRippleModule
+    ReactiveFormsModule,
+    MatRippleModule,
+    MatDialogModule,
+    MatSnackBarModule,
+    FormsModule
   ]
 })
 export class MainPageModule { }

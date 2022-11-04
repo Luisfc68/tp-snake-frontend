@@ -5,7 +5,7 @@ export interface Player {
   playedGames:number;
   gamesWon:number;
   winRatio:number;
-  profileImage?:string;
+  image?:string;
 }
 
 export type SnakePlayer = Player & {

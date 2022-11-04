@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Game } from '../../interfaces/game.interface';
 
 @Component({
@@ -11,8 +11,15 @@ export class GameComponent implements OnInit {
   @Input()
   game!:Game;
 
+  @Output()
+  gameJoined:EventEmitter<Game> = new EventEmitter<Game>();
+
   constructor() { }
 
   ngOnInit(): void {}
+
+  emitGameJoined() {
+    this.gameJoined.emit(this.game);
+  }
 
 }

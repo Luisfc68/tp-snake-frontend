@@ -1,4 +1,4 @@
-<app-return-button></app-return-button>
+<app-return-button (returnEvent)="doReturn()"></app-return-button>
 <main class="players-container">
   <app-profile
     *ngFor="let player of players; trackBy: trackByPlayer"

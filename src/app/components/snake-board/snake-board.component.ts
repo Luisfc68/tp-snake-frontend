@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
-import {Game} from "../../interfaces/game.interface";
-import {SnakePlayer} from "../../interfaces/player.interface";
+import { Game } from '../../interfaces/game.interface';
+import { Player, SnakePlayer } from '../../interfaces/player.interface';
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-snake-board',
@@ -29,10 +30,13 @@ export class SnakeBoardComponent implements OnInit {
           alive: true
         }
       });
-    this.snakes[3].alive = false; // todo borrar, es solo para el maquetado
   }
 
   get formattedLevel() {
-    return this.game.maxLevelReached.toString().padStart(3, '0');
+    return this.game.maxReachedLevel.toString().padStart(3, '0');
+  }
+
+  getProfileImage(snake:Player) {
+    return environment.apiUrl + snake.image;
   }
 }

@@ -1,9 +1,10 @@
-<app-return-button></app-return-button>
+<app-return-button (returnEvent)="doReturn()"></app-return-button>
 <h2 class="title">Available Rooms</h2>
 <main class="rooms-container">
   <app-game
     *ngFor="let room of rooms; trackBy: trackByGame"
     [game]="room"
+    (gameJoined)="enterGame($event)"
   >
   </app-game>
 </main>

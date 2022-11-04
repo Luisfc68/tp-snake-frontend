@@ -9,28 +9,58 @@
   <section class="join-game-panel floating-box">
     <div class="code-input-wrapper">
       <mat-form-field appearance="outline" class="code-input">
-        <input matInput placeholder="Game code..." autocomplete="off">
+        <input
+          matInput
+          placeholder="Game code..."
+          autocomplete="off"
+          [(ngModel)]="joinGameCode"
+        >
       </mat-form-field>
-      <button mat-fab class="join-button" color="warn">
+      <button
+        mat-fab
+        class="join-button"
+        color="warn"
+        (click)="joinExistingGame()"
+      >
         <mat-icon>forward</mat-icon>
       </button>
     </div>
     <hr class="message-separator">
-    <button mat-raised-button class="create-button" color="warn">
+    <button
+      mat-raised-button
+      class="create-button"
+      color="warn"
+      (click)="createGame()"
+    >
       Create Game
       <mat-icon>add_box</mat-icon>
     </button>
   </section>
   <section class="buttons">
     <div>
-      <button mat-raised-button class="option-button floating-box" color="warn">
+      <button
+        mat-raised-button
+        class="option-button floating-box"
+        color="warn"
+        (click)="openProfileDialog()"
+      >
         Profile
       </button>
-      <button mat-raised-button class="option-button floating-box" color="warn">
+      <button
+        mat-raised-button
+        class="option-button floating-box"
+        color="warn"
+        (click)="toRanking()"
+      >
         Ranking
       </button>
     </div>
-    <button mat-raised-button class="option-button floating-box" color="warn">
+    <button
+      mat-raised-button
+      class="option-button floating-box"
+      color="warn"
+      (click)="toRooms()"
+    >
       Room list
     </button>
   </section>

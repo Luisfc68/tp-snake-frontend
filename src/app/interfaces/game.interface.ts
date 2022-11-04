@@ -7,5 +7,5 @@ export interface Game {
   players: Player[];
   owner: Player;
   status: GameStatus
-  maxLevelReached:number;
+  maxReachedLevel:number;
 }

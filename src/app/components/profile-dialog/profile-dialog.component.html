@@ -1,0 +1,55 @@
+<mat-progress-bar
+  mode="indeterminate"
+  color="warn"
+  *ngIf="loading"
+></mat-progress-bar>
+<mat-card class="dialog-content">
+  <div class="user-info">
+    <div class="image-container">
+      <img
+        [src]="profileImage"
+        [alt]="player.username + ' avatar'"
+        fallback="/assets/images/default-profile.png"
+      />
+      <div>
+        <input
+          class="form-control"
+          type="file"
+          id="file-input"
+          accept=".png,.jpeg"
+          (change)="onFileChange($event)"
+        >
+        <button mat-button>
+          <label for="file-input" id="file-label">Change image</label>
+        </button>
+      </div>
+    </div>
+    <form [formGroup]="profileForm" id="profileForm" (ngSubmit)="submit()" class="profile-form">
+      <mat-form-field appearance="outline" class="profile-field">
+        <mat-label>Username</mat-label>
+        <input matInput type="text" formControlName="username"/>
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="profile-field">
+        <mat-label>Email</mat-label>
+        <input matInput type="text" formControlName="email"/>
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="profile-field">
+        <mat-label>Password</mat-label>
+        <input matInput type="password" formControlName="password"/>
+      </mat-form-field>
+    </form>
+  </div>
+  <mat-card-actions class="actions">
+    <button
+      mat-raised-button
+      color="warn"
+      type="submit"
+      [disabled]="!profileForm.valid"
+      form="profileForm"
+      [mat-dialog-close]="true"
+    >
+      Update
+    </button>
+    <button mat-raised-button color="warn" mat-dialog-close>Cancel</button>
+  </mat-card-actions>
+</mat-card>

@@ -1,0 +1,68 @@
+@import "src/styles";
+
+:host {
+  mat-card {
+    padding: 12px;
+    margin: 13px;
+    border: 2px solid $light-primary;
+  }
+
+  .dialog-content {
+    display: flex;
+    flex-direction: column;
+    background-color: $background;
+    width: 35vw;
+  }
+
+  .user-info {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+  }
+
+  .image-container {
+    margin: 20px;
+    display: flex;
+    flex-direction: column;
+    align-self: center;
+    width: 30%;
+    img {
+      clip-path: circle();
+      margin-bottom: 15px;
+      background-color: $dark-white;
+      border: 1.5px solid $dark-white;
+    }
+    button {
+      background-color: $warn;
+      color: $dark-white;
+    }
+    & > div:last-child {
+      margin: auto;
+    }
+  }
+
+  .profile-form {
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+  }
+
+  .actions {
+    justify-content: center;
+  }
+
+  #file-input {
+    display: none;
+  }
+  #file-label {
+    cursor: pointer;
+  }
+
+  ::ng-deep .mat-form-field-appearance-outline.mat-focused .mat-form-field-outline-thick {
+    color: $warn;
+  }
+
+  .profile-field mat-label {
+    color: black !important;
+  }
+}

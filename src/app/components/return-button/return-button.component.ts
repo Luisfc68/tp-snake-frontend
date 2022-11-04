@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 
 @Component({
   selector: 'app-return-button',
@@ -7,9 +7,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ReturnButtonComponent implements OnInit {
 
+  @Output()
+  returnEvent: EventEmitter<void> = new EventEmitter();
+
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+  emitReturn() {
+    this.returnEvent.emit();
   }
 
 }

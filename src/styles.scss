@@ -7,9 +7,17 @@ $dark-white: #E1D9D1;
 $warn: #F54D42;
 $dark-red: #ab1d1d;
 $light-black: #454545;
+$background: #673ab7;
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.dialog-container {
+  mat-dialog-container {
+    background: $background;
+    padding: 0;
+  }
+}
 
 .actions {
   button {
@@ -43,6 +51,14 @@ mat-progress-bar {
 
 .errorSnackBar {
   background-color: $dark-red;
+  color: $dark-white;
+  button {
+    color: $dark-white;
+  }
+}
+
+.successSnackBar {
+  background-color: green;
   color: $dark-white;
   button {
     color: $dark-white;
