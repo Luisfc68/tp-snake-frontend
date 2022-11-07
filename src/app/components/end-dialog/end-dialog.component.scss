@@ -1,0 +1,40 @@
+@import "src/styles";
+
+:host {
+
+  .dialog-content {
+    display: flex;
+    flex-direction: column;
+    background-color: $background;
+    align-items: center;
+    width: 35vw;
+  }
+
+  .end-dialog {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .f-icon {
+    border-radius: 50%;
+    border: 2px solid $dark-white;
+    font-size: 40px;
+    text-align: center;
+    width: 30px;
+    height: 30px;
+    padding: 20px;
+    margin: 20px;
+  }
+
+  p {
+    color: $dark-white;
+    font-size: 20px;
+  }
+
+  button {
+    width: 30%;
+    color: $dark-white;
+    align-self: end;
+  }
+
+}

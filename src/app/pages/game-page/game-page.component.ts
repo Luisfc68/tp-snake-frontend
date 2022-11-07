@@ -1,70 +1,44 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { Game } from '../../interfaces/game.interface';
-import {Router} from "@angular/router";
+import { Router } from '@angular/router';
+import { SocketService } from '../../services/socket/socket.service';
+import { ServerEvents, ClientEvents } from '../../shared/constants/Events';
+import { Player } from '../../interfaces/player.interface';
+import { SnakeBoardComponent } from '../../components/snake-board/snake-board.component';
+import { StorageService } from '../../services/storage/storage.service';
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { BoardPosition, SnakeData } from '../../interfaces/snake.interface';
+import { MatDialog } from '@angular/material/dialog';
+import { EndDialogComponent } from '../../components/end-dialog/end-dialog.component';
 
+@UntilDestroy()
 @Component({
   selector: 'app-game-page',
   templateUrl: './game-page.component.html',
   styleUrls: ['./game-page.component.scss']
 })
-export class GamePageComponent implements OnInit {
+export class GamePageComponent implements OnInit, OnDestroy {
 
   ready:boolean = false;
 
-  isAdmin:boolean = true;
+  isAdmin:boolean = false;
+
+  started:boolean = false;
+
+  actualKey:string|null = null;
 
   game?:Game;
-  /*
-  game: Game = {
-    id: '123456abcdef',
-    players: [
-      {
-        id: '123abc',
-        username: "luisfc68",
-        email:"luisfc68@gmail.com",
-        playedGames: 3,
-        gamesWon: 2,
-        winRatio: 0.66
-      },
-      {
-        id: '456abc',
-        username: "isa123",
-        email:"isabella@gmail.com",
-        playedGames: 3,
-        gamesWon: 4,
-        winRatio: 1
-      },
-      {
-        id: '789abc',
-        username: "max456",
-        email:"max@gmail.com",
-        playedGames: 3,
-        gamesWon: 1,
-        winRatio: 0.33
-      },
-      {
-        id: '123abc',
-        username: "luisfc68asdasdasdasd",
-        email:"luisfc68@gmail.com",
-        playedGames: 3,
-        gamesWon: 2,
-        winRatio: 0.66
-      }
-    ],
-    owner: {
-      id: '123abc',
-      username: "luisfc68asdasdasdasd",
-      email:"luisfc68@gmail.com",
-      playedGames: 3,
-      gamesWon: 2,
-      winRatio: 0.66
-    },
-    status: 'WAITING',
-    maxReachedLevel: 1
-  };
-*/
+
+  @ViewChild(SnakeBoardComponent)
+  board!:SnakeBoardComponent;
+
   constructor(
-    private readonly router:Router
+    private readonly router:Router,
+    private readonly snackBar: MatSnackBar,
+    private readonly socketService:SocketService,
+    private readonly storageService:StorageService,
+    private readonly dialog:MatDialog,
   ) {
     const navigationState = this.router.getCurrentNavigation()?.extras?.state;
     if (navigationState) {
@@ -74,15 +48,152 @@ export class GamePageComponent implements OnInit {
     }
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.initListeners();
+    this.isAdmin = this.game?.owner.id === this.storageService.getUserFromStorage()?.id;
+  }
 
-  notifyReady() {
-    this.ready = true;
-    // todo do socket notification
+  private initListeners() {
+    this.initJoinListener();
+    this.initLeftListener();
+    this.initLevelUpListener();
+    this.initGameStartListener();
+    this.initMovementListener();
+    this.initFoodEatenListener();
+    this.initFoodSpawnListener();
+    this.initDeathListener();
+    this.initEndGameListener();
+    this.initErrorListeners();
+  }
+
+  private initJoinListener() {
+    this.socketService.listenTo<Player>(ServerEvents.PLAYER_JOIN)
+      .pipe(untilDestroyed(this))
+      .subscribe(player => {
+        this.game?.players.push(player);
+        this.board.calculateSnakes();
+      });
+  }
+
+  private initLeftListener() {
+    this.socketService.listenTo<string>(ServerEvents.PLAYER_LEFT)
+      .pipe(untilDestroyed(this))
+      .subscribe(playerId => {
+        this.game!.players = this.game!.players.filter(player => player.id !== playerId);
+        this.board.calculateSnakes();
+      });
+  }
+
+  private initLevelUpListener() {
+    this.socketService.listenTo<string>(ServerEvents.LEVEL_UP)
+      .pipe(untilDestroyed(this))
+      .subscribe(() => {
+        this.game!.maxReachedLevel++;
+      });
+  }
+
+  private initGameStartListener() {
+    this.socketService.listenTo<{boardSize:number}>(ServerEvents.GAME_START)
+      .pipe(untilDestroyed(this))
+      .subscribe(args => {
+        this.board.boardSize = args.boardSize;
+        this.board.calculateSnakes();
+      });
+  }
+
+  private initMovementListener() {
+    this.socketService.listenTo<SnakeData[]>(ServerEvents.MOVEMENTS)
+      .pipe(untilDestroyed(this))
+      .subscribe(args => {
+        console.log(args)
+        this.board.update(args);
+      });
+  }
+
+  private initFoodEatenListener() {
+    this.socketService.listenTo<void>(ServerEvents.FOOD_EATEN)
+      .pipe(untilDestroyed(this))
+      .subscribe(() => this.board.clearFood());
+  }
+
+  private initFoodSpawnListener() {
+    this.socketService.listenTo<BoardPosition>(ServerEvents.FOOD_SPAWN)
+      .pipe(untilDestroyed(this))
+      .subscribe(food => this.board.setFood(food));
+  }
+
+  private initDeathListener() {
+    this.socketService.listenTo<string>(ServerEvents.DEATH)
+      .pipe(untilDestroyed(this))
+      .subscribe(playerId => {
+        this.board.killSnake(playerId);
+        const player = this.storageService.getUserFromStorage();
+        if (playerId === player?.id) {
+          this.dialog.open(EndDialogComponent,
+            {
+              panelClass: ['dialog-container'],
+              disableClose: true
+            });
+        }
+      });
+  }
+
+  private initEndGameListener() {
+    this.socketService.listenTo<string>(ServerEvents.FINISHED)
+      .pipe(untilDestroyed(this))
+      .subscribe(playerId => {
+        debugger
+        const player = this.storageService.getUserFromStorage();
+        console.log('winner ',playerId)
+        if (playerId === player?.id) {
+          this.snackBar.open('You win! Your snake is the best!', 'OK',
+            {
+              panelClass: ['successSnackBar', 'winnerSnackBar'],
+              verticalPosition: 'top'
+            }
+          );
+        }
+      });
+  }
+
+  private initErrorListeners() {
+    this.socketService.listenTo<{error:string}>(ClientEvents.INIT_GAME)
+      .pipe(untilDestroyed(this))
+      .subscribe(error => {
+        this.snackBar.open(error.error, 'OK', { panelClass: ['errorSnackBar'] });
+        this.started = false;
+      });
+  }
+
+  toggleReady() {
+    this.ready = !this.ready;
+    if (this.ready) {
+      this.socketService.emit(ClientEvents.PLAYER_CONFIRM);
+    } else {
+      this.socketService.emit(ClientEvents.PLAYER_UNCONFIRMED);
+    }
   }
 
   initGame() {
-    // todo do socket notification
+    this.socketService.emit(ClientEvents.INIT_GAME);
+    this.started = true;
+  }
+
+  ngOnDestroy(): void {
+    this.socketService.disconnect();
+  }
+
+  @HostListener('document:keydown', ['$event'])
+  handleKeyboardEvent(event: KeyboardEvent) {
+    const controls:{[key:string]:string} = {
+      ArrowUp: 'UP',
+      ArrowDown: 'DOWN',
+      ArrowLeft: 'LEFT',
+      ArrowRight: 'RIGHT'
+    };
+    if (this.started && Object.keys(controls).includes(event.key) && this.actualKey !== event.key) {
+      this.socketService.emit(ClientEvents.CHANGE_DIRECTION, { movingDirection: controls[event.key] });
+    }
   }
 
 }

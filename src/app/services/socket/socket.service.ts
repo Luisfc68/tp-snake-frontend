@@ -2,8 +2,11 @@ import { Injectable } from '@angular/core';
 import { Socket } from 'ngx-socket-io';
 import { environment } from '../../../environments/environment';
 import { StorageService } from '../storage/storage.service';
+import { Observable } from "rxjs";
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class SocketService extends Socket {
 
   constructor(
@@ -22,12 +25,11 @@ export class SocketService extends Socket {
 
   connectToGame(gameId:string) {
     this.ioSocket.io.opts.query.gameId = gameId;
-    try {
-      super.connect();
-    } catch (e) {
-      console.log('error',e)
-    }
+    super.connect();
+  }
 
+  listenTo<T>(event:string):Observable<T>{
+    return super.fromEvent(event);
   }
 
 }

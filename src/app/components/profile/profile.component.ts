@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Player } from '../../interfaces/player.interface';
+import {environment} from "../../../environments/environment";
 
 @Component({
   selector: 'app-profile',
@@ -19,4 +20,7 @@ export class ProfileComponent implements OnInit {
     return this.player.winRatio * 100;
   }
 
+  get profileImage() {
+    return environment.apiUrl + this.player.image;
+  }
 }

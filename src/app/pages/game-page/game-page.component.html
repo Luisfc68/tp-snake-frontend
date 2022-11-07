@@ -7,13 +7,15 @@
   <button
     mat-raised-button
     color="warn"
-    (click)="notifyReady()">
+    (click)="toggleReady()"
+    *ngIf="!started"
+  >
     {{ ready? 'Ready' : 'Not Ready' }}
   </button>
   <button
     mat-raised-button
     color="warn"
-    *ngIf="isAdmin"
+    *ngIf="isAdmin && !started"
     (click)="initGame()">
     Start
   </button>
