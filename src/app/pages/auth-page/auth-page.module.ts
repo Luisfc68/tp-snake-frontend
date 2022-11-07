@@ -8,7 +8,6 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { SignupCardComponent } from '../../components/signup-card/signup-card.component';
 import { SharedModule } from '../../shared/shared.module';
-import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 
 @NgModule({
@@ -23,8 +22,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     AuthPageRoutingModule,
     MatDividerModule,
     ReactiveFormsModule,
-    MatInputModule,
-    MatSnackBarModule
+    MatInputModule
   ]
 })
 export class AuthPageModule { }

@@ -1,11 +1,15 @@
 <div>
   <p class="level-label">Level: {{ formattedLevel }}</p>
-  <button mat-raised-button color="warn" class="copy-button">
-    Copy Code!
+  <button
+    mat-raised-button
+    color="warn"
+    class="copy-button"
+    (click)="gameCodeToClipboard()">
+      Copy Code!
     <mat-icon>content_copy</mat-icon>
   </button>
 </div>
-<canvas id="game-board">
+<canvas id="game-board" #canvas>
 </canvas>
 <section class="players-list">
   <mat-chip-list

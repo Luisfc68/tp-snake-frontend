@@ -26,7 +26,8 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
     MatButtonModule,
     MatCardModule,
     ImgFallbackModule,
-    MatProgressBarModule
+    MatProgressBarModule,
+    MatSnackBarModule
   ]
 })
 export class SharedModule { }

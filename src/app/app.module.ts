@@ -7,7 +7,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { JWT_OPTIONS, JwtModule } from '@auth0/angular-jwt';
 import { environment } from '../environments/environment';
 import { StorageService } from './services/storage/storage.service';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { RefreshInterceptor } from './interceptors/refresh/refresh.interceptor';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,14 @@ import { HttpClientModule } from '@angular/common/http';
       }
     })
   ],
-  providers: [StorageService],
+  providers: [
+    StorageService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: RefreshInterceptor,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

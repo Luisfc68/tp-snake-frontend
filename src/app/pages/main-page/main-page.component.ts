@@ -12,8 +12,7 @@ import { Game } from '../../interfaces/game.interface';
 @Component({
   selector: 'app-main-page',
   templateUrl: './main-page.component.html',
-  styleUrls: ['./main-page.component.scss'],
-  providers: [SocketService]
+  styleUrls: ['./main-page.component.scss']
 })
 export class MainPageComponent implements OnInit {
 
