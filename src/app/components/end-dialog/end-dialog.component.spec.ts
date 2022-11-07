@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { RouterTestingModule } from '@angular/router/testing';
 import { EndDialogComponent } from './end-dialog.component';
 
 describe('EndDialogComponent', () => {
@@ -8,7 +8,12 @@ describe('EndDialogComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ EndDialogComponent ]
+      declarations: [ 
+        EndDialogComponent 
+      ],
+      imports:[
+        RouterTestingModule
+      ]
     })
     .compileComponents();
 
