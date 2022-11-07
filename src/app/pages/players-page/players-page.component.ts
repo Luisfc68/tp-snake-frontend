@@ -28,10 +28,15 @@ export class PlayersPageComponent implements OnInit {
 
   ngOnInit(): void {
     this.getPlayers()
+      .then(() => {
+        if (this.players.length < this.limit) {
+          this.hideRightArrow = true;
+        }
+      });
   }
 
   getPlayers() {
-    this.playersService.getPlayers(this.limit, this.offset)
+    return this.playersService.getPlayers(this.limit, this.offset)
       .then(response => this.players = response)
       .catch(e => this.snackBar.open(e.error.error, 'OK', { panelClass: ['errorSnackBar'] }))
   }
