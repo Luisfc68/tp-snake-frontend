@@ -3,7 +3,15 @@ import { GamePageComponent } from './game-page.component';
 import { RouterTestingModule } from '@angular/router/testing';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
-
+import { SocketIoConfig, SocketIoModule } from 'ngx-socket-io';
+const config: SocketIoConfig = {
+  url: 'http://localhost:8080',
+  options: {
+    query: { gameId: null },
+    reconnection: false,
+    autoConnect: false
+  }
+};
 
 describe('GamePageComponent', () => {
   let component: GamePageComponent;
@@ -21,7 +29,8 @@ describe('GamePageComponent', () => {
       imports:[
         RouterTestingModule,
         MatSnackBarModule,
-        MatDialogModule
+        MatDialogModule,
+        SocketIoModule.forRoot(config),
       ]
     })
     .compileComponents();

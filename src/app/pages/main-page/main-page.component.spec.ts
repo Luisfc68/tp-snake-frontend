@@ -13,6 +13,15 @@ import { MatIconTestingModule } from '@angular/material/icon/testing';
 import { MatFormField,MatFormFieldModule} from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { BrowserAnimationsModule, NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { SocketIoConfig, SocketIoModule } from 'ngx-socket-io';
+const config: SocketIoConfig = {
+  url: 'http://localhost:8080',
+  options: {
+    query: { gameId: null },
+    reconnection: false,
+    autoConnect: false
+  }
+};
 
 describe('MainPageComponent', () => {
   let component: MainPageComponent;
@@ -35,7 +44,8 @@ describe('MainPageComponent', () => {
         MatFormFieldModule,
         MatInputModule,
         BrowserAnimationsModule, 
-        NoopAnimationsModule
+        NoopAnimationsModule,
+        SocketIoModule.forRoot(config)
       ],
       declarations: [ 
         MainPageComponent,

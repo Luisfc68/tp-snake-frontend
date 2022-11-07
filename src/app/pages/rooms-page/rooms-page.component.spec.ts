@@ -1,5 +1,4 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { RoomsPageComponent } from './rooms-page.component';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
@@ -10,6 +9,16 @@ import {ReturnButtonComponent} from '../../components/return-button/return-butto
 import {ReturnButtonModule} from '../../components/return-button/return-button.module'
 import {PaginationButtonsComponent} from '../../components/pagination-buttons/pagination-buttons.component'
 import {PaginationButtonsModule} from '../../components/pagination-buttons/pagination-buttons.module'
+import { SocketIoConfig, SocketIoModule } from 'ngx-socket-io';
+const config: SocketIoConfig = {
+  url: 'http://localhost:8080',
+  options: {
+    query: { gameId: null },
+    reconnection: false,
+    autoConnect: false
+  }
+};
+
 describe('RoomsPageComponent', () => {
   let component: RoomsPageComponent;
   let fixture: ComponentFixture<RoomsPageComponent>;
@@ -29,7 +38,8 @@ describe('RoomsPageComponent', () => {
         RouterTestingModule,
         MatDialogModule,
         ReturnButtonModule,
-        PaginationButtonsModule
+        PaginationButtonsModule,
+        SocketIoModule.forRoot(config)
       ]
     })
     .compileComponents();
