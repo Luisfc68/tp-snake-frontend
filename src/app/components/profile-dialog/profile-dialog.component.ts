@@ -20,6 +20,8 @@ export class ProfileDialogComponent implements OnInit {
 
   loading:boolean = false;
 
+  profileImage:string|undefined;
+
   constructor(
     private formBuilder:FormBuilder,
     private playersService:PlayersService,
@@ -37,10 +39,14 @@ export class ProfileDialogComponent implements OnInit {
     });
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.profileImage = environment.apiUrl + this.player.image;
+  }
 
-  get profileImage() {
-    return environment.apiUrl + this.player.image;
+  private setImagePreview() {
+    const reader = new FileReader();
+    reader.onload = () => this.profileImage = reader.result as string;
+    reader.readAsDataURL(this.profileForm.controls['image'].value);
   }
 
   submit() {
@@ -99,6 +105,7 @@ export class ProfileDialogComponent implements OnInit {
   onFileChange(event:Event) {
     const target = event.currentTarget as HTMLInputElement;
     this.profileForm.controls['image'].setValue(target.files?.item(0) || null);
+    this.setImagePreview();
   }
 
 }

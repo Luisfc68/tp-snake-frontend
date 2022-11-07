@@ -9,6 +9,8 @@ import { environment } from '../environments/environment';
 import { StorageService } from './services/storage/storage.service';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { RefreshInterceptor } from './interceptors/refresh/refresh.interceptor';
+import { config } from './shared/constants/socketio.config';
+import { SocketIoModule } from 'ngx-socket-io';
 
 @NgModule({
   declarations: [
@@ -19,6 +21,7 @@ import { RefreshInterceptor } from './interceptors/refresh/refresh.interceptor';
     AppRoutingModule,
     BrowserAnimationsModule,
     HttpClientModule,
+    SocketIoModule.forRoot(config),
     JwtModule.forRoot({
       jwtOptionsProvider: {
         provide: JWT_OPTIONS,
