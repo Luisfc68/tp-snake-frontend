@@ -98,6 +98,7 @@ export class GamePageComponent implements OnInit, OnDestroy {
       .subscribe(args => {
         this.board.boardSize = args.boardSize;
         this.board.calculateSnakes();
+        this.started = true;
       });
   }
 
