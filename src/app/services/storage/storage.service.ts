@@ -44,4 +44,12 @@ export class StorageService {
   clearStorage() {
     localStorage.clear();
   }
+
+  getUserKey(){
+    return this.USER_KEY;
+  }
+
+  getTokenKey(){
+    return this.TOKENS_KEY;
+  }
 }
