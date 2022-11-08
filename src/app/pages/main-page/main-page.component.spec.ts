@@ -21,15 +21,8 @@ import { SocketService } from 'src/app/services/socket/socket.service';
 import gameMocked from '../../mockData/game.mock';
 import playerMocked from '../../mockData/player.mock';
 import { PlayersService } from 'src/app/services/players/players.service';
+import { config } from '../../shared/constants/socketio.config'
 
-const config: SocketIoConfig = {
-  url: 'http://localhost:8080',
-  options: {
-    query: { gameId: null },
-    reconnection: false,
-    autoConnect: false
-  }
-};
 
 describe('MainPageComponent', () => {
   let router: jasmine.SpyObj<Router>;
