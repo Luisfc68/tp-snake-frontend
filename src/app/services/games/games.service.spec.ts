@@ -2,7 +2,7 @@ import { TestBed } from '@angular/core/testing';
 
 import { GamesService } from './games.service';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import gameMocked from '../../mockData/game.mock';
 import { of } from 'rxjs';
 describe('GamesServiceService', () => {

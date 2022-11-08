@@ -2,12 +2,11 @@ import { TestBed } from '@angular/core/testing';
 import { AuthService } from './auth.service';
 import { JwtHelperService, JWT_OPTIONS  } from '@auth0/angular-jwt';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { HttpClient,  } from '@angular/common/http';
 import { StorageService } from '../storage/storage.service';
-import { Player } from '../../interfaces/player.interface';
 import playerMocked from '../../mockData/player.mock';
 import { LoginResponse } from 'src/app/interfaces/response/login.interface';
-import { Observable, of } from 'rxjs';
+import { of } from 'rxjs';
 import { PlayersService } from '../players/players.service';
 
 

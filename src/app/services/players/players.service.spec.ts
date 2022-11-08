@@ -3,7 +3,7 @@ import { TestBed } from '@angular/core/testing';
 import { PlayersService } from './players.service';
 import { JwtHelperService, JWT_OPTIONS } from '@auth0/angular-jwt';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { RouterTestingModule } from '@angular/router/testing';
 import { of } from 'rxjs';
 import playerMocked from '../../mockData/player.mock';

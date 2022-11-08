@@ -1,7 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 import { StorageService } from './storage.service';
 import { LoginResponse } from '../../interfaces/response/login.interface';
-import { NEVER } from 'rxjs';
 import { Player } from '../../interfaces/player.interface';
 import playerMocked from '../../mockData/player.mock';
 

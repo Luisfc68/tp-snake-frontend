@@ -13,7 +13,7 @@ import { MatIconTestingModule } from '@angular/material/icon/testing';
 import { MatFormField,MatFormFieldModule} from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { BrowserAnimationsModule, NoopAnimationsModule } from '@angular/platform-browser/animations';
-import { SocketIoConfig, SocketIoModule } from 'ngx-socket-io';
+import { SocketIoModule } from 'ngx-socket-io';
 import { Router } from '@angular/router';
 import { StorageService } from 'src/app/services/storage/storage.service';
 import { GamesService } from 'src/app/services/games/games.service';

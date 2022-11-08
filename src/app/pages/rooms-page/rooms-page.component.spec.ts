@@ -17,15 +17,8 @@ import { SocketService } from 'src/app/services/socket/socket.service';
 import { Router } from '@angular/router';
 import { StorageService } from 'src/app/services/storage/storage.service';
 import { PlayersService } from 'src/app/services/players/players.service';
+import { config } from '../../shared/constants/socketio.config'
 
-const config: SocketIoConfig = {
-  url: 'http://localhost:8080',
-  options: {
-    query: { gameId: null },
-    reconnection: false,
-    autoConnect: false
-  }
-};
 
 describe('RoomsPageComponent', () => {
   let gameService: jasmine.SpyObj<GamesService>;

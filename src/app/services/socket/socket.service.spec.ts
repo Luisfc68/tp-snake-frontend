@@ -1,17 +1,10 @@
 import { TestBed } from '@angular/core/testing';
 import { SocketService } from './socket.service';
-import { SocketIoConfig, SocketIoModule, Socket } from 'ngx-socket-io';
+import { SocketIoModule, Socket } from 'ngx-socket-io';
 import { StorageService } from '../storage/storage.service';
 import { of } from 'rxjs';
+import { config } from '../../shared/constants/socketio.config'
 
-const config: SocketIoConfig = {
-  url: 'http://localhost:8080',
-  options: {
-    query: { gameId: null },
-    reconnection: false,
-    autoConnect: false
-  }
-};
 
 describe('SocketService', () => {
   let service: SocketService;
@@ -22,14 +15,7 @@ describe('SocketService', () => {
     const socketSpy = jasmine.createSpyObj('Socket', ['connect','fromEvent','emit','disconnect']);
     TestBed.configureTestingModule({
       
-      imports:[SocketIoModule.forRoot({
-        url: 'http://localhost:8080',
-        options: {
-          query: { gameId: null },
-          reconnection: false,
-          autoConnect: false
-        }
-      })],
+      imports:[SocketIoModule.forRoot(config)],
       providers: [
         SocketService,
         { provide: StorageService, useValue: storageServiceSpy },

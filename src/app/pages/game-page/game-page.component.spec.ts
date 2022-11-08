@@ -3,7 +3,7 @@ import { GamePageComponent } from './game-page.component';
 import { RouterTestingModule } from '@angular/router/testing';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
-import { SocketIoConfig, SocketIoModule } from 'ngx-socket-io';
+import { SocketIoModule } from 'ngx-socket-io';
 import { config } from '../../shared/constants/socketio.config'
 
 
