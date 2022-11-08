@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { JwtHelperService } from '@auth0/angular-jwt';
-import { HttpClient } from '@angular/common/http';
+import { HttpBackend, HttpClient } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
 import { LoginResponse } from '../../interfaces/response/login.interface';
 import { firstValueFrom } from 'rxjs';
@@ -14,13 +14,16 @@ import { StorageService } from '../storage/storage.service';
 export class AuthService {
 
   private readonly BASE_PATH = `${environment.apiUrl}/auth`;
+  private http:HttpClient;
 
   constructor(
     private jwtHelper:JwtHelperService,
-    private http:HttpClient,
     private playerServices:PlayersService,
-    private storageService:StorageService
-  ) {}
+    private storageService:StorageService,
+    private httpBackend: HttpBackend
+  ) {
+    this.http = new HttpClient(httpBackend);
+  }
 
   login(email:string, password:string):Promise<Player> {
     return firstValueFrom(this.http.post<LoginResponse>(this.BASE_PATH, { email, password }))
