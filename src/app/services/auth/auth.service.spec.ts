@@ -49,7 +49,7 @@ describe('AuthService', () => {
   });
 
 
-  it('should login', (done: DoneFn) => {
+  it('login: should login', (done: DoneFn) => {
     const expectedValue: LoginResponse= {accessToken:'example',refreshToken:'example.com'};
     storageService.saveTokensOnStorage.and.callFake((loginResponse) => {});
     storageService.saveUserOnStorage.and.callFake((loginResponse) => {});
@@ -62,7 +62,7 @@ describe('AuthService', () => {
     done()
   });
 
-  it('should refresh', (done: DoneFn) => {
+  it('refresh: should refresh', (done: DoneFn) => {
     const expectedValue: LoginResponse= {accessToken:'example',refreshToken:'example.com'};
     storageService.getTokensFromStorage.and.returnValue(expectedValue);
     storageService.saveTokensOnStorage.and.callFake((loginResponse) => {});

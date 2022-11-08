@@ -84,7 +84,7 @@ describe('AuthPageComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should use login(authService) and navigateBy Url(Router) methods', () => {
+  it('doLogin: should use login(authService) and navigateBy Url(Router) methods', () => {
     const sent: LoginRequest = {email: 'test@example.com', password: 'test'};
     authService.login.and.returnValue(Promise.resolve(playerMocked));
     playerService.createPlayer.and.returnValue(Promise.resolve(playerMocked));
@@ -96,7 +96,7 @@ describe('AuthPageComponent', () => {
     })
     });
 
-  it('should use createPlayer (playerService), login(authService) and navigateBy Url(Router)', () => {
+  it('doSignUp: should use createPlayer (playerService), login(authService)', () => {
     const sent: SignUpRequest = {username:'example', email: 'test@example.com', password: 'test'};
     playerService.createPlayer.and.returnValue(Promise.resolve(playerMocked));
     authService.login.and.returnValue(Promise.resolve(playerMocked));

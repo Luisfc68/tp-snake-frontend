@@ -17,7 +17,7 @@ describe('StorageService', () => {
     expect(service).toBeTruthy();
   });
 
-  it('should return token value', () => {
+  it('getTokensFromStorage: should return token value', () => {
     localStorage = {};
     const expectedValue: LoginResponse= {accessToken:'example',refreshToken:'example.com'};
     spyOn(window.localStorage, 'getItem').and.returnValue(JSON.stringify(expectedValue));
@@ -25,7 +25,7 @@ describe('StorageService', () => {
     expect(response).toEqual(expectedValue)
   });
 
-  it('should return null get item token', () => {
+  it('getTokensFromStorage: should return null get item token', () => {
     localStorage = {};
     const expectedValue= null;
     spyOn(window.localStorage, 'getItem').and.returnValue(null);
@@ -33,7 +33,7 @@ describe('StorageService', () => {
     expect(response).toEqual(expectedValue)
   });
 
-  it('should save token', () => {
+  it('saveTokensOnStorage: should save token', () => {
     const localStore = new Map();
     const expectedValue: LoginResponse= {accessToken:'example',refreshToken:'example.com'};
     spyOn(window.localStorage,'setItem').and.callFake(
@@ -43,7 +43,7 @@ describe('StorageService', () => {
     expect(localStore.get(service.getTokenKey())).toEqual(JSON.stringify(expectedValue))
   });
 
-  it('should save user', () => {
+  it('saveUserOnStorage: should save user', () => {
     const localStore = new Map();
     const expectedValue: Player= playerMocked;
     spyOn(window.localStorage,'setItem').and.callFake(
@@ -53,7 +53,7 @@ describe('StorageService', () => {
     expect(localStore.get(service.getUserKey())).toEqual(JSON.stringify(expectedValue))
   });
 
-  it('should return player', () => {
+  it('getUserFromStorage: should return player', () => {
     const localStore = new Map();
     const expectedValue: Player= playerMocked;
     spyOn(window.localStorage, 'getItem').and.returnValue(JSON.stringify(expectedValue));
@@ -61,7 +61,7 @@ describe('StorageService', () => {
     expect(response).toEqual(expectedValue)
   });
 
-  it('should return null get user', () => {
+  it('getUserFromStorage: should return null get user', () => {
     const localStore = new Map();
     const expectedValue: Player= playerMocked;
     spyOn(window.localStorage, 'getItem').and.returnValue(JSON.stringify(expectedValue));
@@ -69,7 +69,7 @@ describe('StorageService', () => {
     expect(response).toEqual(expectedValue)
   });
 
-  it('should return access token', () => {
+  it('getAccessToken: should return access token', () => {
     localStorage = {accessToken:'example'};
     const expectedValue: LoginResponse= {accessToken:'example',refreshToken:'example.com'};
     spyOn(window.localStorage, 'getItem').and.returnValue(JSON.stringify(expectedValue));

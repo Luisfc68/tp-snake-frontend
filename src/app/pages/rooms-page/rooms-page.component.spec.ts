@@ -11,7 +11,12 @@ import {PaginationButtonsComponent} from '../../components/pagination-buttons/pa
 import {PaginationButtonsModule} from '../../components/pagination-buttons/pagination-buttons.module'
 import { SocketIoConfig, SocketIoModule } from 'ngx-socket-io';
 import gameMocked from '../../mockData/game.mock';
+import playerMocked from '../../mockData/player.mock';
 import { GamesService } from '../../services/games/games.service';
+import { SocketService } from 'src/app/services/socket/socket.service';
+import { Router } from '@angular/router';
+import { StorageService } from 'src/app/services/storage/storage.service';
+import { PlayersService } from 'src/app/services/players/players.service';
 
 const config: SocketIoConfig = {
   url: 'http://localhost:8080',
@@ -24,16 +29,29 @@ const config: SocketIoConfig = {
 
 describe('RoomsPageComponent', () => {
   let gameService: jasmine.SpyObj<GamesService>;
+  let playerService: jasmine.SpyObj<PlayersService>;
   let component: RoomsPageComponent;
   let fixture: ComponentFixture<RoomsPageComponent>;
+  let socketService: jasmine.SpyObj<SocketService>;
+  let router: jasmine.SpyObj<Router>;
+  let storageService:jasmine.SpyObj<StorageService>;
 
   beforeEach(async () => {
-    const gameServiceSpy = jasmine.createSpyObj('GamesService', ['getRooms']);
+    const gameServiceSpy = jasmine.createSpyObj('GamesService', ['getRooms','getGame']);
+    const socketServiceSpy = jasmine.createSpyObj('SocketService', ['connectToGame']);
+    const routerSpy = jasmine.createSpyObj('Router', ['navigateByUrl']);
+    const playerServiceSpy = jasmine.createSpyObj('PlayersService', ['getPlayer']);
+    const storageServiceSpy = jasmine.createSpyObj('StorageService', ['getUserFromStorage','getAccessToken']);
     await TestBed.configureTestingModule({
       providers:[
         MatSnackBar,
         { provide: GamesService, useValue: gameServiceSpy },
-        { provide: ComponentFixtureAutoDetect, useValue: true }
+        { provide: SocketService, useValue: socketServiceSpy },
+        { provide: ComponentFixtureAutoDetect, useValue: true },
+        { provide: Router, useValue: routerSpy },
+        { provide: StorageService, useValue: storageServiceSpy },
+        { provide: PlayersService, useValue: playerServiceSpy },
+
       ],
       declarations: [ 
         RoomsPageComponent ,
@@ -51,6 +69,10 @@ describe('RoomsPageComponent', () => {
     })
     .compileComponents();
     gameService = TestBed.inject(GamesService) as jasmine.SpyObj<GamesService>;
+    socketService = TestBed.inject(SocketService) as jasmine.SpyObj<SocketService>;
+    router = TestBed.inject(Router) as jasmine.SpyObj<Router>;
+    storageService = TestBed.inject(StorageService) as jasmine.SpyObj<StorageService>;
+    playerService = TestBed.inject(PlayersService) as jasmine.SpyObj<PlayersService>;
     gameService.getRooms.and.returnValue(Promise.resolve(Array.of()))
     fixture = TestBed.createComponent(RoomsPageComponent);
     component = fixture.componentInstance;    
@@ -60,7 +82,7 @@ describe('RoomsPageComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should use getRooms', (done: DoneFn) => {
+  it('getRooms: should use getRooms', (done: DoneFn) => {
     const expectedValue= [gameMocked];
     gameService.getRooms.and.returnValue(Promise.resolve(expectedValue));
     component.getRooms().then(result =>{
@@ -69,7 +91,7 @@ describe('RoomsPageComponent', () => {
     done()
   });
 
-  it('should use getRooms and turn hideLeftArrow false', () => {
+  it('getNextRooms: should use getRooms ', () => {
     spyOn(component,'handleNextRoomArrows').and.callThrough();
     const expectedValue= [gameMocked];
     gameService.getRooms.and.returnValue(Promise.resolve(expectedValue));
@@ -78,22 +100,32 @@ describe('RoomsPageComponent', () => {
     expect(component.hideLeftArrow).toBeTrue();
   });
 
-  it('getNextRooms: should use getRooms and turn hideRightArrow true', () => {
-    spyOn(component,'getNextRooms').and.callThrough();
-    component.offset= 4;
-    component.limit=4;
-    gameService.getRooms.and.returnValue(Promise.resolve([]));
-    component.getNextRooms()
+  it('handleNextRoomArrows: should use turn hideLeftArrow false ', () => {
+    component.hideLeftArrow=true;
+    fixture.detectChanges();
+    spyOn(component,'handleNextRoomArrows').and.callThrough();
+    component.handleNextRoomArrows()
     expect(gameService.getRooms).toHaveBeenCalled();
+    expect(component.hideLeftArrow).toBeFalse();
+  });
 
+  it('handleNextRoomArrows: should use turn hideRightArrow true ', () => {
+    component.hideRightArrow=false;
+    component.rooms= [gameMocked]
+    component.limit=4;
+    fixture.detectChanges();
+    spyOn(component,'handleNextRoomArrows').and.callThrough();
+    component.handleNextRoomArrows()
+    expect(gameService.getRooms).toHaveBeenCalled();
+    expect(component.hideRightArrow).toBeTrue();
   });
 
   it('getPreviousRooms: should use getRooms and turn hideLeftArrow true', () => {
-    spyOn(component,'getPreviousRooms').and.callThrough();
     component.offset= 4;
     component.limit=4;
     component.hideLeftArrow=false;
     fixture.detectChanges();
+    spyOn(component,'getPreviousRooms').and.callThrough();
     const expectedValue= [gameMocked];
     gameService.getRooms.and.returnValue(Promise.resolve(expectedValue));
     component.getPreviousRooms()
@@ -112,6 +144,16 @@ describe('RoomsPageComponent', () => {
     component.getPreviousRooms()
     expect(gameService.getRooms).toHaveBeenCalled();
     expect(component.hideLeftArrow).toBeFalse()
+  });
+
+  it('enterGame: should use getGame', () => {
+    gameService.getGame.and.returnValue(Promise.resolve(gameMocked));
+    socketService.connectToGame.and.callFake(() => {});
+    playerService.getPlayer.and.returnValue(Promise.resolve(playerMocked));
+    storageService.getUserFromStorage.and.returnValue(playerMocked);
+    router.navigateByUrl.and.returnValue(Promise.resolve(true));
+    component.enterGame(gameMocked);
+    expect(gameService.getGame).toHaveBeenCalled();
   });
 
 });

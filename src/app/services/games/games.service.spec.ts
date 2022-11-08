@@ -38,7 +38,7 @@ describe('GamesServiceService', () => {
     done();
   });
 
-  it('should get game', (done: DoneFn) => {
+  it('getGame: should return expected value', (done: DoneFn) => {
     const expectedValue = gameMocked;
     httpClient.get.and.returnValue(of(expectedValue));
     service.getGame('example').then(result =>{
@@ -47,7 +47,7 @@ describe('GamesServiceService', () => {
     done();
   })
 
-  it('should create game', (done: DoneFn) => {
+  it('createGame: should create game', (done: DoneFn) => {
     const expectedValue = gameMocked;
     httpClient.post.and.returnValue(of(expectedValue));
     service.createGame().then(result =>{

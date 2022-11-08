@@ -35,7 +35,7 @@ describe('PlayersServiceService', () => {
     expect(service).toBeTruthy();
   });
 
-  it('should get player', (done: DoneFn) => {
+  it('getPlayer: should get player', (done: DoneFn) => {
     const expectedValue = playerMocked;
     httpClient.get.and.returnValue(of(expectedValue));
     service.getPlayer('example').then(result =>{
@@ -44,7 +44,7 @@ describe('PlayersServiceService', () => {
     done();
   });
 
-  it('should get player', (done: DoneFn) => {
+  it('getPlayers: should get player', (done: DoneFn) => {
     const expectedValue = [playerMocked];
     httpClient.get.and.returnValue(of(expectedValue));
     service.getPlayers(1,1).then(result =>{
@@ -53,7 +53,7 @@ describe('PlayersServiceService', () => {
     done();
   });
 
-  it('should create player', (done: DoneFn) => {
+  it('createPlayer: should create player', (done: DoneFn) => {
     const expectedValue = playerMocked;
     httpClient.post.and.returnValue(of(expectedValue));
     service.createPlayer('example','example','example').then(result =>{
@@ -62,7 +62,7 @@ describe('PlayersServiceService', () => {
     done();
   })
 
-  it('should update player', (done: DoneFn) => {
+  it('updatePlayer: should update player', (done: DoneFn) => {
     let expectedValue = playerMocked;
     expectedValue.username= 'updated';
     httpClient.put.and.returnValue(of(expectedValue));
@@ -72,7 +72,7 @@ describe('PlayersServiceService', () => {
     done();
   })
 
-  it('should update player image', (done: DoneFn) => {
+  it('updatePlayerImage: should update player image', (done: DoneFn) => {
     let updatedValue = playerMocked;
     httpClient.put.and.returnValue(of(updatedValue));
     const image: File = new File([""], "filename", { type: 'text/html' });;
@@ -82,12 +82,3 @@ describe('PlayersServiceService', () => {
     done();
   })
 });
-
-class BodyRequest{
-  username: any;
-  email: any;
-  constructor(username: any, email: any,password: any) {
-    this.username = username;
-    this.email = email;
-  }
-}

@@ -71,6 +71,7 @@ describe('PlayersPageComponent', () => {
   });
 
   it('should use getPlayers and turn hideLeftArrow false', () => {
+    spyOn(component,'getNextPlayers').and.callThrough();
     const expectedValue= [playerMocked]
     playerService.getPlayers.and.returnValue(Promise.resolve(expectedValue));
     component.getNextPlayers();
@@ -78,19 +79,31 @@ describe('PlayersPageComponent', () => {
     expect(playerService.getPlayers).toHaveBeenCalled();
   });
 
-  it('should use getPlayers and turn hideRightArrow true', () => {
-    playerService.getPlayers.and.returnValue(Promise.resolve([]));
-    component.getNextPlayers();
-    fixture.detectChanges();
-    expect(playerService.getPlayers).toHaveBeenCalled();
-  });
 
-  it('should use getPlayers and turn hideRightArrow true', () => {
+  it('should use getPlayers and turn hideRightArrow false', () => {
+    component.hideRightArrow = true;
+    fixture.detectChanges();
     spyOn(component,'getPreviousPlayers').and.callThrough();
     const expectedValue= [playerMocked]
+    fixture.detectChanges();
     playerService.getPlayers.and.returnValue(Promise.resolve(expectedValue));
     component.getPreviousPlayers();
-    fixture.detectChanges();
     expect(playerService.getPlayers).toHaveBeenCalled();
+    expect(component.hideRightArrow).toBeFalse();
+  });
+
+  it('should use getPlayers and turn hideLeftArrow true', () => {
+    component.hideLeftArrow = false;
+    component.limit = 2;
+    component.offset = 2;
+    fixture.detectChanges();
+    spyOn(component,'getPreviousPlayers').and.callThrough();
+    const expectedValue= [playerMocked]
+    fixture.detectChanges();
+    playerService.getPlayers.and.returnValue(Promise.resolve(expectedValue));
+    component.getPreviousPlayers();
+    expect(playerService.getPlayers).toHaveBeenCalled();
+    expect(component.hideLeftArrow).toBeTrue();
+
   });
 });

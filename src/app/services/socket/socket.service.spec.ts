@@ -45,7 +45,7 @@ describe('SocketService', () => {
     expect(service).toBeTruthy();
   });
   
-  it('should use method connect and access token', () => {
+  it('connectToGame: should use method connect and access token', () => {
     socket.ioSocket = {
       io: {
         opts:{
@@ -62,19 +62,19 @@ describe('SocketService', () => {
     expect(socket.connect).toHaveBeenCalled();
   });
 
-  it('should use from event method', () => {
+  it('listenTo: should use from event method', () => {
     socket.fromEvent.and.returnValue(of())
     service.listenTo('example');
     expect(socket.fromEvent).toHaveBeenCalled();
   });
 
-  it('should use disconnect method', () => {
+  it('disconnect: should use disconnect method', () => {
     socket.disconnect.and.callFake(()=> {});
     service.disconnect();
     expect(socket.disconnect).toHaveBeenCalled();
   });
 
-  it('should use emit method', () => {
+  it('emit: should use emit method', () => {
     socket.emit.and.callFake(()=> {});
     service.emit('example');
     expect(socket.emit).toHaveBeenCalled();
