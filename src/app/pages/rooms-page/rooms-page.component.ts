@@ -64,7 +64,7 @@ export class RoomsPageComponent implements OnInit {
       .catch(e => this.snackBar.open(e.error.error, 'OK', { panelClass: ['errorSnackBar'] }));
   }
 
-  handleNextRoomArrows() {
+  private handleNextRoomArrows() {
     if (this.hideLeftArrow) {
       this.hideLeftArrow = false;
     }

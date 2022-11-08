@@ -92,32 +92,12 @@ describe('RoomsPageComponent', () => {
   });
 
   it('getNextRooms: should use getRooms ', () => {
-    spyOn(component,'handleNextRoomArrows').and.callThrough();
+    spyOn(component,'getNextRooms').and.callThrough();
     const expectedValue= [gameMocked];
     gameService.getRooms.and.returnValue(Promise.resolve(expectedValue));
     component.getNextRooms()
     expect(gameService.getRooms).toHaveBeenCalled();
     expect(component.hideLeftArrow).toBeTrue();
-  });
-
-  it('handleNextRoomArrows: should use turn hideLeftArrow false ', () => {
-    component.hideLeftArrow=true;
-    fixture.detectChanges();
-    spyOn(component,'handleNextRoomArrows').and.callThrough();
-    component.handleNextRoomArrows()
-    expect(gameService.getRooms).toHaveBeenCalled();
-    expect(component.hideLeftArrow).toBeFalse();
-  });
-
-  it('handleNextRoomArrows: should use turn hideRightArrow true ', () => {
-    component.hideRightArrow=false;
-    component.rooms= [gameMocked]
-    component.limit=4;
-    fixture.detectChanges();
-    spyOn(component,'handleNextRoomArrows').and.callThrough();
-    component.handleNextRoomArrows()
-    expect(gameService.getRooms).toHaveBeenCalled();
-    expect(component.hideRightArrow).toBeTrue();
   });
 
   it('getPreviousRooms: should use getRooms and turn hideLeftArrow true', () => {
