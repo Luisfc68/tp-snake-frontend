@@ -1,13 +1,12 @@
 <mat-card class="profile-container floating-box">
   <div class="image-container">
-    <div
+    <img
       mat-card-avatar
       class="avatar-image"
-      [ngStyle]="{
-        'background-image': 'url(' + profileImage + '), url(/assets/images/default-profile.png)'
-      }"
-    >
-    </div>
+      [src]="profileImage"
+      [alt]="player.username + ' avatar'"
+      fallback="/assets/images/default-profile.png"
+    />
   </div>
   <div class="player-info">
     <p class="player-name mat-display-1">{{ player.username }}</p>

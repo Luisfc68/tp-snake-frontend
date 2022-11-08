@@ -12,15 +12,16 @@ export class ProfileComponent implements OnInit {
   @Input()
   player!:Player;
 
+  profileImage?:string;
+
   constructor() { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.profileImage = environment.apiUrl + this.player.image;
+  }
 
   get winRationPercentage() {
     return this.player.winRatio * 100;
   }
 
-  get profileImage() {
-    return environment.apiUrl + this.player.image;
-  }
 }
