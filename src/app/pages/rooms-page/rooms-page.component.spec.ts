@@ -1,23 +1,22 @@
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, ComponentFixtureAutoDetect, TestBed } from '@angular/core/testing';
-import { RoomsPageComponent } from './rooms-page.component';
-import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { RouterTestingModule } from '@angular/router/testing';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatDialogModule } from '@angular/material/dialog';
-import {ReturnButtonComponent} from '../../components/return-button/return-button.component'
-import {ReturnButtonModule} from '../../components/return-button/return-button.module'
-import {PaginationButtonsComponent} from '../../components/pagination-buttons/pagination-buttons.component'
-import {PaginationButtonsModule} from '../../components/pagination-buttons/pagination-buttons.module'
-import { SocketIoConfig, SocketIoModule } from 'ngx-socket-io';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
+import { RouterTestingModule } from '@angular/router/testing';
+import { SocketIoModule } from 'ngx-socket-io';
+import { PlayersService } from 'src/app/services/players/players.service';
+import { SocketService } from 'src/app/services/socket/socket.service';
+import { StorageService } from 'src/app/services/storage/storage.service';
+import { PaginationButtonsComponent } from '../../components/pagination-buttons/pagination-buttons.component';
+import { PaginationButtonsModule } from '../../components/pagination-buttons/pagination-buttons.module';
+import { ReturnButtonComponent } from '../../components/return-button/return-button.component';
+import { ReturnButtonModule } from '../../components/return-button/return-button.module';
 import gameMocked from '../../mockData/game.mock';
 import playerMocked from '../../mockData/player.mock';
 import { GamesService } from '../../services/games/games.service';
-import { SocketService } from 'src/app/services/socket/socket.service';
-import { Router } from '@angular/router';
-import { StorageService } from 'src/app/services/storage/storage.service';
-import { PlayersService } from 'src/app/services/players/players.service';
-import { config } from '../../shared/constants/socketio.config'
+import { config } from '../../shared/constants/socketio.config';
+import { RoomsPageComponent } from './rooms-page.component';
 
 
 describe('RoomsPageComponent', () => {

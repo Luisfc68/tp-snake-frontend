@@ -1,27 +1,25 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { MainPageComponent } from './main-page.component';
-import { JwtHelperService, JWT_OPTIONS } from '@auth0/angular-jwt';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { RouterTestingModule } from '@angular/router/testing';
-import { MatDialog } from '@angular/material/dialog';
-import { MatDialogModule } from '@angular/material/dialog';
-import { MatSnackBar } from '@angular/material/snack-bar';
-import {MatIcon} from '@angular/material/icon';
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
+import { MatFormField, MatFormFieldModule } from '@angular/material/form-field';
+import { MatIcon } from '@angular/material/icon';
 import { MatIconTestingModule } from '@angular/material/icon/testing';
-import { MatFormField,MatFormFieldModule} from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { BrowserAnimationsModule, NoopAnimationsModule } from '@angular/platform-browser/animations';
-import { SocketIoModule } from 'ngx-socket-io';
 import { Router } from '@angular/router';
-import { StorageService } from 'src/app/services/storage/storage.service';
+import { RouterTestingModule } from '@angular/router/testing';
+import { JwtHelperService, JWT_OPTIONS } from '@auth0/angular-jwt';
+import { SocketIoModule } from 'ngx-socket-io';
 import { GamesService } from 'src/app/services/games/games.service';
+import { PlayersService } from 'src/app/services/players/players.service';
 import { SocketService } from 'src/app/services/socket/socket.service';
+import { StorageService } from 'src/app/services/storage/storage.service';
 import gameMocked from '../../mockData/game.mock';
 import playerMocked from '../../mockData/player.mock';
-import { PlayersService } from 'src/app/services/players/players.service';
-import { config } from '../../shared/constants/socketio.config'
+import { config } from '../../shared/constants/socketio.config';
+import { MainPageComponent } from './main-page.component';
 
 
 describe('MainPageComponent', () => {
@@ -104,7 +102,7 @@ describe('MainPageComponent', () => {
     expect(router.navigateByUrl).toHaveBeenCalled();
   });
 
-  it('createGame: should use createGame, connectToGame and navigateByUrl', () => {
+  it('createGame: should use createGame and navigateByUrl', () => {
     gameService.createGame.and.returnValue(Promise.resolve(gameMocked));
     socketService.connectToGame.and.callFake(()=>{});
     router.navigateByUrl.and.returnValue(Promise.resolve(true));
@@ -117,7 +115,7 @@ describe('MainPageComponent', () => {
     });
   });
 
-  it('joinExistingGame: should use createGame, connectToGame and navigateByUrl', () => {
+  it('joinExistingGame: should use connectToGame ', () => {
     gameService.getGame.and.returnValue(Promise.resolve(gameMocked));
     socketService.connectToGame.and.callFake(()=>{});
     router.navigateByUrl.and.returnValue(Promise.resolve(true));
@@ -127,7 +125,6 @@ describe('MainPageComponent', () => {
     expect(gameService.getGame).toHaveBeenCalled();
     gameService.getGame('example').then(()=>{
       expect(socketService.connectToGame).toHaveBeenCalled();
-      expect(playerService.getPlayer).toHaveBeenCalled();
     });
   });
 });

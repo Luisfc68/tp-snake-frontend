@@ -1,17 +1,17 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { PlayersPageComponent } from './players-page.component';
-import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
-import { RouterTestingModule } from '@angular/router/testing';
-import { MatSnackBar } from '@angular/material/snack-bar';
-import { MatDialogModule } from '@angular/material/dialog';
-import {ReturnButtonComponent} from '../../components/return-button/return-button.component'
-import {ReturnButtonModule} from '../../components/return-button/return-button.module'
-import {PaginationButtonsComponent} from '../../components/pagination-buttons/pagination-buttons.component'
-import {PaginationButtonsModule} from '../../components/pagination-buttons/pagination-buttons.module'
-import { PlayersService } from 'src/app/services/players/players.service';
-import playerMocked from '../../mockData/player.mock';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ChangeDetectionStrategy } from '@angular/core';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { RouterTestingModule } from '@angular/router/testing';
+import { PlayersService } from 'src/app/services/players/players.service';
+import { PaginationButtonsComponent } from '../../components/pagination-buttons/pagination-buttons.component';
+import { PaginationButtonsModule } from '../../components/pagination-buttons/pagination-buttons.module';
+import { ReturnButtonComponent } from '../../components/return-button/return-button.component';
+import { ReturnButtonModule } from '../../components/return-button/return-button.module';
+import playerMocked from '../../mockData/player.mock';
+import { PlayersPageComponent } from './players-page.component';
 
 describe('PlayersPageComponent', () => {
   let playerService: jasmine.SpyObj<PlayersService>;

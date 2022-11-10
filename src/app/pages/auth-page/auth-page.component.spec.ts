@@ -1,25 +1,24 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { AuthPageComponent } from './auth-page.component';
-import { MatDialog } from '@angular/material/dialog';
-import { MatDialogModule } from '@angular/material/dialog';
-import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
-import { JwtHelperService, JWT_OPTIONS } from '@auth0/angular-jwt';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
-import { BrowserAnimationsModule, NoopAnimationsModule } from '@angular/platform-browser/animations';
-import {MatIcon} from '@angular/material/icon';
+import { FormBuilder } from '@angular/forms';
+import { MatCard, MatCardModule } from '@angular/material/card';
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
+import { MatDivider, MatDividerModule } from '@angular/material/divider';
+import { MatIcon } from '@angular/material/icon';
 import { MatIconTestingModule } from '@angular/material/icon/testing';
-import {MatCard,MatCardModule} from '@angular/material/card';
-import {MatDivider,MatDividerModule} from '@angular/material/divider';
-import {LoginCardComponent} from '../../components/login-card/login-card.component'
-import {SignupCardComponent} from '../../components/signup-card/signup-card.component'
-import { FormBuilder} from '@angular/forms';
-import { AuthService } from 'src/app/services/auth/auth.service';
+import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
+import { BrowserAnimationsModule, NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { Router } from '@angular/router';
+import { JwtHelperService, JWT_OPTIONS } from '@auth0/angular-jwt';
+import { AuthService } from 'src/app/services/auth/auth.service';
 import { PlayersService } from 'src/app/services/players/players.service';
+import { LoginCardComponent } from '../../components/login-card/login-card.component';
+import { SignupCardComponent } from '../../components/signup-card/signup-card.component';
 import { LoginRequest } from '../../interfaces/request/login.interface';
-import playerMocked from '../../mockData/player.mock';
 import { SignUpRequest } from '../../interfaces/request/signUp.interface';
+import playerMocked from '../../mockData/player.mock';
+import { AuthPageComponent } from './auth-page.component';
 
 
 
